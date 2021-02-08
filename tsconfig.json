@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "target": "es5",
+      "esModuleInterop": true,
+    },
+    "include": [
+        "src/**/*"
+      ],
+      "typeRoots": [
+        "node_modules/@types"
+      ]
+  }
