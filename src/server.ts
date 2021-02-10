@@ -1,9 +1,12 @@
 import express from 'express';
-import {initRoutes} from './routes/init';
+import {json, urlencoded} from 'body-parser';
 import logger from 'morgan';
+import {initRoutes} from './routes/init';
 import cors from 'cors';
-import bodyParser from 'body-parser';
+import sequelize from "./models/init";
+
 const app = express();
+
 
 //logger
 app.use(logger("combined"));
@@ -13,13 +16,17 @@ app.use(cors({
     optionsSuccessStatus:200,
 }))
 
-//body_parser
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-    extended:true
-}))
+//express bp
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 initRoutes(app);
+ 
+//sync db
+sequelize.sync({force:true})
+
+
+
 
  app.listen(3000,() => {
      console.log("app was started successfully");

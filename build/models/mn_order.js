@@ -1,24 +1,18 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class MN_order extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  MN_order.init({
-    order_id: DataTypes.INTEGER,
-    customer_id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'MN_order',
-  });
-  return MN_order;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppUserModel = exports.MN_Order = void 0;
+const sequelize_1 = require("sequelize");
+const init_1 = __importDefault(require("./init"));
+class MN_Order extends sequelize_1.Model {
+}
+exports.MN_Order = MN_Order;
+class AppUserModel {
+}
+exports.AppUserModel = AppUserModel;
+MN_Order.init({
+    id: { type: sequelize_1.INTEGER, primaryKey: true, autoIncrement: true },
+    customer_id: { type: sequelize_1.INTEGER }
+}, { sequelize: init_1.default, modelName: 'MN_Order' });
