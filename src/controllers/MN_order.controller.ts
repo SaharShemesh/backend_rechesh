@@ -15,4 +15,3 @@ export let post_order = async (req:Request, res:Response) => {
      res.status(400).json({e});
     }
 }
-
