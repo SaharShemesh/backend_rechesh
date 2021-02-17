@@ -6,5 +6,12 @@ export const findAll = () => {
 }
 
 export const post_order = (details:object) => {
+   
      return MN_Order.create(details);
+}
+
+export const find_one = (id:number) => {
+ return MN_Order.findOne({where:{
+     id    
+    }});
 }

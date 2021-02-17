@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 initRoutes(app);
  
 //sync db
-sequelize.sync({force:true})
+sequelize.sync({alter:true})
 
 
 

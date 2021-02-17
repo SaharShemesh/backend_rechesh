@@ -20,7 +20,7 @@ app.use(express_1.default.json()); // for parsing application/json
 app.use(express_1.default.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 init_1.initRoutes(app);
 //sync db
-init_2.default.sync({ force: true });
+init_2.default.sync({ alter: true });
 app.listen(3000, () => {
     console.log("app was started successfully");
 });

@@ -1,4 +1,4 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import * as order_helper from '../helpers/MN_Order.helper';
 
 export let get_all = (req:Request, res:Response) => {
@@ -16,3 +16,11 @@ export let post_order = async (req:Request, res:Response) => {
     }
 }
 
+export let get_order = async (req:Request, res:Response, next:NextFunction) => {
+      let order_id = parseInt(req.params.id);
+      let order = await order_helper.find_one(order_id);
+      if(!order)
+         res.status(404).json({message:"order was not found"});
+      else
+        res.status(200).json(order);
+}
