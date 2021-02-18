@@ -1,5 +1,7 @@
 import { Model,INTEGER,BOOLEAN,STRING, } from 'sequelize'
+import { Bid } from './bid';
 import sequelize from './init';
+import { Order } from './order';
 
 export class Sell_Item extends Model {
 
@@ -21,3 +23,8 @@ Sell_Item.init(
   },
   { sequelize, modelName: 'Sell_item' }
 )
+
+Sell_Item.belongsTo(Order, {
+  foreignKey: 'sub_order'
+});
+Sell_Item.hasMany(Bid);

@@ -1,5 +1,8 @@
 import { Model,INTEGER,BOOLEAN,STRING,DATEONLY } from 'sequelize'
+import { Bid } from './bid';
 import sequelize from './init';
+import { MN_Order } from './mn_order';
+import { Sell_Item } from './sell_item';
 
 export class Order extends Model {
 
@@ -34,3 +37,9 @@ Order.init(
   },
   { sequelize, modelName: 'Order' }
 )
+
+Order.belongsTo(MN_Order, {
+  foreignKey:'mn_order'
+});
+Order.hasMany(Sell_Item);
+Order.hasMany(Bid);
