@@ -24,7 +24,3 @@ Sell_Item.init(
   { sequelize, modelName: 'Sell_item' }
 )
 
-Sell_Item.belongsTo(Order, {
-  foreignKey: 'sub_order'
-});
-Sell_Item.hasMany(Bid);

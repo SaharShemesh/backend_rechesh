@@ -1,5 +1,8 @@
 import { Model,INTEGER,STRING } from 'sequelize'
 import sequelize from './init';
+import { MN_Order } from './mn_order';
+import { Order } from './order';
+
 
 export class User extends Model {
 
@@ -17,3 +20,4 @@ User.init(
   },
   { sequelize, modelName: 'User' }
 )
+

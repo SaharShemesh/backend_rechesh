@@ -20,10 +20,3 @@ Bid.init(
   { sequelize, modelName: 'bid' }
 )
 
-Bid.belongsTo(Order, {
-  foreignKey: 'order'
-});
-Bid.hasMany(Bid_Item);
-Bid.belongsToMany(Sell_Item, {
-  through: 'Bid_Item'
-});

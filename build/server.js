@@ -8,6 +8,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const init_1 = require("./routes/init");
 const cors_1 = __importDefault(require("cors"));
 const init_2 = __importDefault(require("./models/init"));
+const associations_1 = __importDefault(require("./config/associations"));
 const app = express_1.default();
 //logger
 app.use(morgan_1.default("combined"));
@@ -21,6 +22,8 @@ app.use(express_1.default.urlencoded({ extended: true })); // for parsing applic
 init_1.initRoutes(app);
 //sync db
 init_2.default.sync({ alter: true });
+//load associations
+associations_1.default();
 app.listen(3000, () => {
     console.log("app was started successfully");
 });

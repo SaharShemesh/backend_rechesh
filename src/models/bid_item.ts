@@ -18,7 +18,3 @@ Bid_Item.init(
   },
   { sequelize, modelName: 'Bid_item' }
 )
-
-Bid_Item.belongsTo(Bid, {
-  foreignKey: 'bid_id'
-})

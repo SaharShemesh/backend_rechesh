@@ -13,3 +13,5 @@ MN_Order.init({
     id: { type: sequelize_1.INTEGER, primaryKey: true, autoIncrement: true },
     customer_id: { type: sequelize_1.INTEGER }
 }, { sequelize: init_1.default, modelName: 'mn_order' });
+//MN_Order.hasMany(Order);
+//MN_Order.belongsTo(User, {foreignKey:'customer_id'});

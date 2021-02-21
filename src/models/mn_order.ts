@@ -15,5 +15,5 @@ MN_Order.init(
   { sequelize, modelName: 'mn_order' }
 )
 
-MN_Order.hasMany(Order);
-MN_Order.hasOne(User);
+//MN_Order.hasMany(Order);
+//MN_Order.belongsTo(User, {foreignKey:'customer_id'});

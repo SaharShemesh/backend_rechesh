@@ -19,7 +19,7 @@ Order.init(
     status: {type:INTEGER},
     bd: {type:INTEGER},
     erp_order: {type:STRING(12)},
-    erq_req: {type:STRING(6)},
+    erp_req: {type:STRING(6)},
     invc: {type:STRING},
     order_type: {type:INTEGER},
     procument_type: {type:INTEGER},
@@ -38,8 +38,3 @@ Order.init(
   { sequelize, modelName: 'Order' }
 )
 
-Order.belongsTo(MN_Order, {
-  foreignKey:'mn_order'
-});
-Order.hasMany(Sell_Item);
-Order.hasMany(Bid);

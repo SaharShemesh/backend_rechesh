@@ -4,7 +4,7 @@ import logger from 'morgan';
 import {initRoutes} from './routes/init';
 import cors from 'cors';
 import sequelize from "./models/init";
-
+import load_associations from "./config/associations"
 const app = express();
 
 
@@ -26,6 +26,8 @@ initRoutes(app);
 sequelize.sync({alter:true})
 
 
+//load associations
+load_associations();
 
 
  app.listen(3000,() => {
