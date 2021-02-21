@@ -1,11 +1,11 @@
 import { Model,INTEGER,STRING } from 'sequelize'
 import sequelize from './init';
 
-export class Paka_type extends Model {
+export class Paka_Type extends Model {
 
 }
 
-Paka_type.init(
+Paka_Type.init(
   {
     id: {type:INTEGER,primaryKey:true,autoIncrement:true},
     type: {type:STRING}
