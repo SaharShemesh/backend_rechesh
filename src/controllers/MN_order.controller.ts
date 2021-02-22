@@ -14,7 +14,7 @@ export let post_order = async (req:Request, res:Response) => {
     catch(e){
      res.status(400).json({e});
     }
-
+    console.log(req.body);
 }
 
 export let get_order = async (req:Request, res:Response, next:NextFunction) => {
