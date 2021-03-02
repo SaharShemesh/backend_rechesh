@@ -7,6 +7,7 @@ export let get_all = (req:Request, res:Response) => {
 
 
 export let post_order = async (req:Request, res:Response) => {
+
     try{
    let order = await order_helper.post_order(req.body);
     res.status(201).json({message:"created the main order",order});
@@ -25,3 +26,11 @@ export let get_order = async (req:Request, res:Response, next:NextFunction) => {
       else
         res.status(200).json(order);
 }
+
+export let is_order = async (req:Request, res:Response, next:NextFunction) => {
+        let order_id = parseInt(req.params.id);
+        let order = await order_helper.find_one(order_id);
+        if(!order)
+           res.status(404).json({message:"order was not found"});
+        next();
+  }

@@ -21,6 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initRoutes = void 0;
 const main_orders = __importStar(require("./MN_order.route"));
+const sell_item = __importStar(require("./sell_item.route"));
 function initRoutes(app) {
     app.get("/api", (request, response) => {
         response.end("welcome to the rechesh");
@@ -28,5 +29,7 @@ function initRoutes(app) {
     //model routing
     app.use("/api/Main-Orders", main_orders.plural_router);
     app.use("/api/Main-Order", main_orders.singular_router);
+    app.use("/api/Main-Order/:order_id/order/:sub_id/sell-items", sell_item.plural_router);
+    app.use("/api/Main-Order/:order_id/order/:sub_id/sell-items", sell_item.singular_router);
 }
 exports.initRoutes = initRoutes;

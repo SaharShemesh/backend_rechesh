@@ -1,16 +1,16 @@
-import {MN_Order} from '../models/mn_order';
+import {Order} from '../models/order';
 
 export const findAll = () => {
-   return MN_Order
+   return Order
     .findAll({ include: [{ all: true }] })
 }
 
 export const post_order = (details:object) => {
-     return MN_Order.create(details);
+     return Order.create(details);
 }
 
 export const find_one = (id:number) => {
- return MN_Order.findOne({where:{
+ return Order.findOne({where:{
      id    
     }});
 }
