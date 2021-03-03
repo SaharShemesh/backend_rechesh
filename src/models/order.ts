@@ -1,3 +1,4 @@
+import { NOW } from 'sequelize';
 import { Model,INTEGER,BOOLEAN,STRING,DATEONLY } from 'sequelize'
 import { Bid } from './bid';
 import sequelize from './init';
@@ -16,7 +17,7 @@ Order.init(
     professional_at2: {type:INTEGER},
     mn_order: {type:INTEGER},
     document_created: {type:BOOLEAN},
-    status: {type:INTEGER},
+    status: {type:INTEGER, defaultValue:2},
     bd: {type:INTEGER},
     erp_order: {type:STRING(12)},
     erp_req: {type:STRING(6)},
@@ -29,7 +30,7 @@ Order.init(
     budget: {type:INTEGER},
     schedule: {type:DATEONLY},
     assignment_id: {type:INTEGER},
-    start_date: {type:DATEONLY},
+    start_date: {type:DATEONLY, defaultValue:NOW},
     invitor: {type:INTEGER},
     professional_empl: {type:INTEGER},
     is_invitor: {type:BOOLEAN},
