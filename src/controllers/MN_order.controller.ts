@@ -25,3 +25,9 @@ export let get_order = async (req:Request, res:Response, next:NextFunction) => {
       else
         res.status(200).json(order);
 }
+
+export let delete_order = (req:Request, res:Response) => {
+        let order_id = parseInt(req.params.id);
+        order_helper.delete_order(order_id).then(() => res.status(200).json({message:"delete main order"})).catch((error) => res.status(400).json({error}));
+}
+
