@@ -7,7 +7,6 @@ export let get_all = (req:Request, res:Response) => {
 
 
 export let post_order = async (req:Request, res:Response) => {
-
     try{
    let order = await order_helper.post_order(req.body);
     res.status(201).json({message:"created the main order",order});
@@ -15,7 +14,7 @@ export let post_order = async (req:Request, res:Response) => {
     catch(e){
      res.status(400).json({e});
     }
-
+    console.log(req.body);
 }
 
 export let get_order = async (req:Request, res:Response, next:NextFunction) => {
