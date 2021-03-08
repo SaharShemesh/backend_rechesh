@@ -4,7 +4,7 @@ import logger from 'morgan';
 import {initRoutes} from './routes/init';
 import cors from 'cors';
 import sequelize from "./models/init";
-// import load_associations from "./config/associations"
+import load_associations from "./config/associations";
 const app = express();
 
 
@@ -18,16 +18,16 @@ app.use(cors({
 
 //express bp
 app.use(json()) // for parsing application/json
-app.use(.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 initRoutes(app);
  
-//sync db
+// sync db
 sequelize.sync({alter:true})
 
 
-// //load associations
-// load_associations();
+// load associations
+load_associations();
 
 
  app.listen(3000,() => {
