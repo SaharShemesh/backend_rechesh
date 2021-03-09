@@ -2,11 +2,7 @@
   "development": {
     "storage": "../dummyDb/rechesh_database.sqlite",
     "dialect": "sqlite",
-<<<<<<< HEAD
-    "logging": false
-=======
     "logging":false
->>>>>>> 06a58b10e810be7df3c46442b53662b3a547374e
   },
   "test": {
     "username": "root",

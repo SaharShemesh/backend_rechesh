@@ -1,5 +1,4 @@
 import { Model,INTEGER,DATEONLY } from 'sequelize'
-import { Bid } from './bid';
 import sequelize from './init';
 
 export class Bid_Item extends Model {

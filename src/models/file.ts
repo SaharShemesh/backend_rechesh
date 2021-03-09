@@ -1,11 +1,11 @@
 import { Model,INTEGER,STRING } from 'sequelize'
 import sequelize from './init';
 
-export class Files extends Model {
+export class File extends Model {
 
 }
 
-Files.init(
+File.init(
   {
     id: {type:INTEGER,primaryKey:true,autoIncrement:true},
     name: {type:STRING},

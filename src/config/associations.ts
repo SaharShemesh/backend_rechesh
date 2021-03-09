@@ -45,69 +45,92 @@ export default function load_associations(){
   models.Budget_Type.hasMany(models.Order);
 
   //creator & Sell_Item
-  /****************STOPPED HERE********************/
-  models.Creator.belongsTo(models.Sell_Item);
-  models.Sell_Item.hasOne(models.Creator);
+  models.Sell_Item.belongsTo(models.Creator, {
+    foreignKey:"creator",
+    as:"Creator"
+  });
+  models.Creator.hasMany(models.Sell_Item);
 
-  //Files & Bid
-  models.File.belongsTo(models.Sell_Item);
-  models.Sell_Item.hasMany(models.File);
+  //File & Bid
+  models.Bid.belongsTo(models.File);
+  models.File.hasMany(models.Bid);
 
   //Order_Type & Order
-  models.Order_Type.belongsTo(models.Order);
-  models.Order_Type.hasOne(models.Order);
+  models.Order.belongsTo(models.Order_Type, {
+    foreignKey:"order_type",
+    as:"Order_Type"
+  });
+  models.Order_Type.hasMany(models.Order);
 
   //Paka_Type & Order
-  models.Paka_Type.belongsTo(models.Order);
-  models.Order.hasOne(models.Paka_Type);
+  models.Order.belongsTo(models.Paka_Type);
+  models.Paka_Type.hasMany(models.Order);
 
   //Paka & Order
-  models.Paka.belongsTo(models.Order);
-  models.Order.hasOne(models.Paka);
+  models.Order.belongsTo(models.Paka, {
+    foreignKey:"paka",
+    as:"Paka"
+  });
+  models.Paka.hasMany(models.Order);
 
   //Priority & Order
-  models.Priority.belongsTo(models.Order);
-  models.Order.hasOne(models.Priority);
+  models.Order.belongsTo(models.Priority);
+  models.Priority.hasMany(models.Order);
 
   //Priority_Type & Order
-  models.Priority_Type.belongsTo(models.Order);
-  models.Order.hasOne(models.Priority_Type);
+  models.Order.belongsTo(models.Priority_Type);
+  models.Priority_Type.hasMany(models.Order);
 
   //Procument_Type & Order
-  models.Procument_Type.belongsTo(models.Order);
-  models.Order.hasOne(models.Procument_Type);
+  models.Order.belongsTo(models.Procument_Type, {
+    foreignKey:"procument_type",
+    as:"Procument_Type"
+  });
+  models.Procument_Type.hasMany(models.Order);
 
   //Provider & Sell_Item
-  models.Provider.belongsTo(models.Sell_Item);
-  models.Sell_Item.hasOne(models.Provider);
+  models.Sell_Item.belongsTo(models.Provider, {
+    foreignKey:"provider",
+    as:"Provider"
+  });
+  models.Provider.hasMany(models.Sell_Item);
 
   //Pulling_Bag & Order
-  models.Pulling_Bag.belongsTo(models.Order);
-  models.Order.hasOne(models.Pulling_Bag);
+  models.Order.belongsTo(models.Pulling_Bag, {
+    foreignKey:"pulling_bag",
+    as:"Pulling_Bag"
+  });
+  models.Pulling_Bag.hasMany(models.Order);
 
   //Soldier & User
-  models.Soldier.belongsTo(models.User);
-  models.User.hasOne(models.Soldier);
+  models.User.belongsTo(models.Soldier);
+  models.Soldier.hasOne(models.User);
 
   //Status_History & Order
   models.Status_History.belongsTo(models.Order);
-  models.Order.hasOne(models.Status_History);
+  models.Order.hasMany(models.Status_History);
 
   //Status & Order
-  models.Status.belongsTo(models.Order);
-  models.Order.hasOne(models.Status);
+  models.Order.belongsTo(models.Status, {
+    foreignKey:"status",
+    as:"Status"
+  });
+  models.Status.hasMany(models.Order);
 
   //Unit & Sell_Item
-  models.Unit.belongsTo(models.Sell_Item);
-  models.Sell_Item.hasOne(models.Unit);
+  models.Sell_Item.belongsTo(models.Unit, {
+    foreignKey:"unit",
+    as:"Unit"
+  });
+  models.Unit.hasMany(models.Sell_Item);
 
   //User_Premissions & User
-  models.User_Permissions.belongsTo(models.User);
-  models.User.hasOne(models.User_Permissions);
+  models.User.belongsTo(models.User_Permissions);
+  models.User_Permissions.hasMany(models.User);
 
   //User_Roles & User
-  models.User_Roles.belongsTo(models.User);
-  models.User.hasOne(models.User_Roles);
+  models.User.belongsTo(models.User_Roles);
+  models.User_Roles.hasMany(models.User);
 
 
 }
