@@ -1,4 +1,6 @@
-import {Bid} from '../models/Bid';
+import {Bid} from '../models/bid';
+import {Status} from '../models/status'
+import {User} from '../models/user'
 
 export const findAll = () => {
    return Bid
@@ -17,7 +19,8 @@ export const find_one = (id:number) => {
 }
 
 export const delete_bid = (id:number) => {
-    return Bid.destroy({where:{
-    id    
-   }});
+            return Bid.destroy({where:{
+                  id    
+                  }});
+      
 }

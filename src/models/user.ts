@@ -10,7 +10,7 @@ export class User extends Model {
 
 User.init(
   {
-    id_num: {type:STRING,primaryKey:true,autoIncrement:true},
+    id_num: {type:INTEGER,primaryKey:true,autoIncrement:true},
     user_rank: {type:INTEGER},
     name: {type:STRING},
     phone: {type:STRING},
@@ -18,6 +18,6 @@ User.init(
     department: {type:INTEGER},
     user_typeid: {type:INTEGER},
   },
-  { sequelize, modelName: 'User' }
+  { sequelize, modelName: 'user' }
 )
 
