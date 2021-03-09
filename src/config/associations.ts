@@ -27,26 +27,29 @@ export default function load_associations(){
   });
 
   //User & Main Order
-  models.MN_Order.belongsTo(models.User);
-  models.User.hasOne(models.MN_Order);
+  models.MN_Order.belongsTo(models.User, {
+    foreignKey:"customer_id"
+  });
+  models.User.hasMany(models.MN_Order);
 
   //assigment & Order
-  models.Assignment.belongsTo(models.Order);
-  models.Order.hasOne(models.Assignment);
+  models.Order.belongsTo(models.Assignment);
+  models.Assignment.hasMany(models.Order);
 
   //base_hierarchy & User
   models.Base_Hierarchy.belongsTo(models.User);
   models.User.hasOne(models.Base_Hierarchy);
 
   //Budget_Type & Order
-  models.Budget_Type.belongsTo(models.Order);
-  models.Order.hasOne(models.Budget_Type);
+  models.Order.belongsTo(models.Budget_Type);
+  models.Budget_Type.hasMany(models.Order);
 
   //creator & Sell_Item
+  /****************STOPPED HERE********************/
   models.Creator.belongsTo(models.Sell_Item);
   models.Sell_Item.hasOne(models.Creator);
 
-  //File & Bid
+  //Files & Bid
   models.File.belongsTo(models.Sell_Item);
   models.Sell_Item.hasMany(models.File);
 
@@ -55,8 +58,8 @@ export default function load_associations(){
   models.Order_Type.hasOne(models.Order);
 
   //Paka_Type & Order
-  models.Paka_type.belongsTo(models.Order);
-  models.Order.hasOne(models.Paka_type);
+  models.Paka_Type.belongsTo(models.Order);
+  models.Order.hasOne(models.Paka_Type);
 
   //Paka & Order
   models.Paka.belongsTo(models.Order);

@@ -23,7 +23,7 @@ app.use(urlencoded({ extended: true })) // for parsing application/x-www-form-ur
 initRoutes(app);
  
 // sync db
-sequelize.sync({alter:true})
+sequelize.sync({force:true})
 
 
 // load associations

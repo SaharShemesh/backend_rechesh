@@ -3,7 +3,11 @@ import {Base_Hierarchy} from './base_hierarchy';
 import {Budget_Type} from './budget_type';
 import {Constants} from './constants';
 import {Creator} from './creator';
+<<<<<<< HEAD
 import {Files} from './files';
+=======
+import {File} from './file';
+>>>>>>> 06a58b10e810be7df3c46442b53662b3a547374e
 import {Order_Type} from './order_type';
 import {Paka_Type} from './paka_type';
 import {Paka} from './paka';
@@ -30,7 +34,11 @@ export {
     Budget_Type,
     Constants,
     Creator,
+<<<<<<< HEAD
     Files,
+=======
+    File,
+>>>>>>> 06a58b10e810be7df3c46442b53662b3a547374e
     Order_Type,
     Paka_Type,
     Paka,
