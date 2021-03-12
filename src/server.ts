@@ -22,14 +22,13 @@ app.use(urlencoded({ extended: true })) // for parsing application/x-www-form-ur
 
 initRoutes(app);
  
-// sync db
-sequelize.sync({force:true})
+
 
 
 // load associations
 load_associations();
 
-
+ sequelize.authenticate().then(() => console.log('Connection has been established successfully.') ).catch((error) => console.error('Unable to connect to the database:', error))
  app.listen(3000,() => {
      console.log("app was started successfully");
  })

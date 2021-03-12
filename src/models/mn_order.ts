@@ -8,7 +8,7 @@ export class MN_Order extends Model {
 MN_Order.init(
   {
     id: {type:INTEGER,primaryKey:true,autoIncrement:true},
-    customer_id: {type:INTEGER}
+    //customer_id: {type:INTEGER}
   },
-  { sequelize, modelName: 'mn_order' }
+  { sequelize, modelName: 'main_order' }
 )
