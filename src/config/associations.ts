@@ -176,6 +176,44 @@ export default function load_associations(){
   });
 
 
+  //Sell_Item
+  //Sell_Item & Provider
+  models.Sell_Item.belongsTo(models.Provider, {
+    foreignKey:"provider",
+    as:"Provider"
+  });
+  models.Provider.hasMany(models.Sell_Item,{
+    foreignKey:"provider"
+  });
+
+  //Sell_Item & Creator
+  models.Sell_Item.belongsTo(models.Creator, {
+    foreignKey:"creator",
+    as:"Creator"
+  });
+  models.Creator.hasMany(models.Sell_Item,{
+    foreignKey:"creator"
+  });
+
+  //Sell_Item & Unit
+  models.Sell_Item.belongsTo(models.Unit, {
+    foreignKey:"unit",
+    as:"Unit"
+  });
+  models.Unit.hasMany(models.Sell_Item,{
+    foreignKey:"unit"
+  });
+
+  //Bid
+  //Bid & provider
+  // models.Bid.belongsTo(models.Provider, {
+  //   foreignKey:"provider",
+  // });
+  // models.Provider.hasMany(models.Bid,{
+  //   foreignKey:"provider"
+  // }); 
+
+  
 //  //user
 
 //   //base_hierarchy & User

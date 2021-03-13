@@ -12,10 +12,10 @@ Bid.init(
   {
     bid_id: {type:INTEGER,primaryKey:true,autoIncrement:true},
     order: {type:INTEGER},
-    providor: {type:INTEGER},
-    invitor: {type:INTEGER},
-    bim_commander: {type:INTEGER},
-    professional_empl: {type:INTEGER},
+    //provider: {type:INTEGER},
+    //invitor: {type:INTEGER},
+    //bim_commander: {type:INTEGER},
+    //professional_empl: {type:INTEGER},
   },
   { sequelize, modelName: 'bid' }
 )
