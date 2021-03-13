@@ -17,5 +17,5 @@ User.init(
     //department: {type:INTEGER},
     user_typeid: {type:INTEGER},
   },
-  { sequelize, modelName: 'User' }
+  { sequelize, modelName: 'user' }
 )

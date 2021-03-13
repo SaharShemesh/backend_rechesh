@@ -7,3 +7,9 @@ export const findAll = (sub_order:number) => {
     }, include: [{ all: true }] })
 }
 
+export const delete_sellItem = (id:number) => {
+    return Sell_Item.destroy({where:{
+          id    
+          }});
+
+}

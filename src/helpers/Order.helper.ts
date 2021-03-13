@@ -14,3 +14,10 @@ export const find_one = (id:number) => {
      id    
     }});
 }
+
+export const get_status = (id:number) => {
+    return Order.findOne({where:{
+        attributes: ['id', 'status']
+        //@ts-ignore
+       }}).then((order:Order) => order.status).catch();
+   }

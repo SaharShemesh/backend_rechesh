@@ -2,6 +2,7 @@ import { Model,INTEGER,STRING } from 'sequelize'
 import sequelize from './init';
 
 export class Status extends Model {
+    static id: number;
 
 }
 

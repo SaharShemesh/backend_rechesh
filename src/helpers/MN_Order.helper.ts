@@ -23,3 +23,9 @@ export const find_one = (id:number) => {
      id    
     }});
 }
+
+export const delete_order = (id:number) => {
+    return MN_Order.destroy({where:{
+    id    
+   }});
+}

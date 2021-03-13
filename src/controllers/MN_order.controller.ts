@@ -26,10 +26,8 @@ export let get_order = async (req:Request, res:Response, next:NextFunction) => {
         res.status(200).json(order);
 }
 
-export let is_order = async (req:Request, res:Response, next:NextFunction) => {
+export let delete_order = (req:Request, res:Response) => {
         let order_id = parseInt(req.params.id);
-        let order = await order_helper.find_one(order_id);
-        if(!order)
-           res.status(404).json({message:"order was not found"});
-        next();
-  }
+        order_helper.delete_order(order_id).then(() => res.status(200).json({message:"delete main order"})).catch((error) => res.status(400).json({error}));
+}
+
