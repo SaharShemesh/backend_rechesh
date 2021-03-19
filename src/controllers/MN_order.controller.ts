@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response} from "express";
 import * as order_helper from '../helpers/MN_Order.helper';
 
-export let get_all = (req:Request, res:Response) => {
-        order_helper.findAll().then((main_orders) => res.status(200).json(main_orders)).catch((error) => res.status(500).json({error}));
+export let get_all = (req:Request, res:Response) => { 
+  order_helper.findAll().then((main_orders) => res.status(200).json(main_orders)).catch((error) => res.status(500).json({error}));
 }
 
 

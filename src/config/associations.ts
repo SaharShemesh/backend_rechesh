@@ -1,6 +1,5 @@
 import * as models from "../models/index";
 import sequelize from "../models/init";
-
 export default function load_associations(){
 
   //order 
@@ -14,17 +13,21 @@ export default function load_associations(){
     foreignKey:"Bim_commander"
   });
    //proffesional_att1
-  models.Soldier.hasOne(models.Order,{
+  models.Order.belongsTo(models.Soldier,{
    foreignKey:"Professional_at1",
    as:"proffesional_authority_1"
   })
-
+ models.Soldier.hasMany(models.Order,{
+  foreignKey:"Professional_at1", 
+ })
     //proffesional_att2
-    models.Soldier.hasOne(models.Order,{
+    models.Order.belongsTo(models.Soldier,{
       foreignKey:"Professional_at2",
       as:"proffesional_authority_2"
      })
-
+     models.Soldier.hasMany(models.Order,{
+      foreignKey:"Professional_at2", 
+     })
      //models.Order.belongsTo(models.Soldier);
   
      //Order & Main Order
@@ -34,20 +37,29 @@ export default function load_associations(){
   });
   models.MN_Order.hasMany(models.Order,{
     foreignKey: "mn_order",
-    // as:{
-    //   plural:"Orders",
-    //   singular:"Order"
-    // }
   });
-  
+   //all bids connected to specific order
+    models.Order.hasMany(models.Bid,{
+      foreignKey:"order",
+      as:"Bids"
+    })
+    models.Bid.belongsTo(models.Order,{
+      foreignKey:"order",
+    })
 //   //win_bid
    models.Bid.hasOne(models.Order,{
-     foreignKey:"win_bid",
-   })
+    foreignKey:"win_bid",
+    constraints:false
+   });
    models.Order.belongsTo(models.Bid,{
     foreignKey:"win_bid",
+    constraints:false,
     as:"Win_bid"
    });
+
+
+
+
 //   //Order & Sell Item
   models.Sell_Item.belongsTo(models.Order, {
     foreignKey:"sub_order",
@@ -67,10 +79,11 @@ export default function load_associations(){
 
 //   //Budget_Type & Order
   models.Order.belongsTo(models.Budget_Type,{
-    foreignKey:"budget",
+    foreignKey:"budget_type",
+    as:"Budget_type"
   });
   models.Budget_Type.hasMany(models.Order,{
-    foreignKey:"budget"
+    foreignKey:"budget_type"
   });
 
 //   //Priority & Order
@@ -171,69 +184,84 @@ export default function load_associations(){
     as:"Customer"
   });
   models.User.hasMany(models.MN_Order, {
-    foreignKey:"customer_id",
-    as:"Customer"
+    foreignKey:"customer_id"
   });
 
 
 //  //user
 
 //   //base_hierarchy & User
-//   models.User.belongsTo(models.Base_Hierarchy,{
-//     foreignKey:"location_id",
-//     as:"Location"
-//   });
-//   models.Base_Hierarchy.hasMany(models.User);
+  models.User.belongsTo(models.Base_Hierarchy, {
+    foreignKey:"location_id",
+    as:"Location"
+  });
+  models.Base_Hierarchy.hasMany(models.User,{
+    foreignKey:"location_id",
+  });
 
-//     //User_Premissions & User
-//     models.User.belongsTo(models.User_Permissions,{
-//       foreignKey:"permission_id",
-//       as:"Permission"
-//     });
-//     models.User_Permissions.hasMany(models.User);
+// //     //User_Premissions & User
+    models.User.belongsTo(models.User_Permissions,{
+      foreignKey:"permission_id",
+      as:"Permission"
+    });
+    models.User_Permissions.hasMany(models.User,{
+      foreignKey:"permission_id"
+    });
   
-//     //User_Roles & User
-//     models.User.belongsTo(models.User_Roles,{
-//       foreignKey:"role_id",
-//       as:"Role"
-//     });
-//     models.User_Roles.hasMany(models.User);
+// //     //User_Roles & User
+    models.User.belongsTo(models.User_Roles,{
+      foreignKey:"role_id",
+      as:"Role"
+    });
+    models.User_Roles.hasMany(models.User,{
+      foreignKey:"role_id",
+    });
 
-//   //Soldier & User
-//   models.User.belongsTo(models.Soldier,{
-//     foreignKey:"soldier_id",
-//      as:"Soldier"
-//   });
-//   models.Soldier.hasOne(models.User);
+// //   //Soldier & User
+  models.User.belongsTo(models.Soldier,{
+    foreignKey:"soldier_id",
+  });
+  models.Soldier.hasOne(models.User,{
+    foreignKey:"soldier_id",
+  });
 
-//   //sell_item
+// //   //sell_item
 
-//     //Provider & Sell_Item
-//   models.Sell_Item.belongsTo(models.Provider, {
-//     foreignKey:"provider",
-//     as:"Provider"
-//   });
-//   models.Provider.hasMany(models.Sell_Item);
-//   //creator & Sell_Item
-//   models.Sell_Item.belongsTo(models.Creator, {
-//     foreignKey:"creator",
-//     as:"Creator"
-//   });
-//   models.Creator.hasMany(models.Sell_Item);
+// //     //Provider & Sell_Item 
 
-//  //Unit & Sell_Item
-//  models.Sell_Item.belongsTo(models.Unit, {
-//   foreignKey:"unit",
-//   as:"Unit"
-// });
-// models.Unit.hasMany(models.Sell_Item);
+  models.Provider.hasMany(models.Sell_Item,{
+    foreignKey:"provider"
+  });
+
+  models.Sell_Item.belongsTo(models.Provider, {
+    foreignKey:"provider",
+    as:"Provider"
+  });
+ 
+// //   //creator & Sell_Item
+  models.Sell_Item.belongsTo(models.Creator, {
+    foreignKey:"creator",
+    as:"Creator"
+  });
+  models.Creator.hasMany(models.Sell_Item,{
+    foreignKey:"creator",
+  });
+
+// //  //Unit & Sell_Item
+ models.Sell_Item.belongsTo(models.Unit, {
+  foreignKey:"unit",
+  as:"Unit"
+});
+models.Unit.hasMany(models.Sell_Item,{
+  foreignKey:"unit"
+});
 
 
 //   //bid
   
 //   //File & Bid
-//   models.Bid.belongsTo(models.File);
-//   models.File.hasMany(models.Bid);
+  models.Bid.belongsTo(models.File);
+  models.File.hasMany(models.Bid);
 
 
 
@@ -243,7 +271,7 @@ export default function load_associations(){
 
  
 // sync db
-sequelize.sync({force:true}).then(() => console.log("success")).catch((e) => console.log("faliur",e));
+sequelize.sync({alter:true}).then(() => console.log("success")).catch((e) => console.log("faliur",e));
 
 
 
