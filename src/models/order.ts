@@ -1,7 +1,7 @@
 import { NOW } from 'sequelize';
 import { Model,INTEGER,BOOLEAN,STRING,DATEONLY } from 'sequelize'
 import sequelize from './init';
-
+import {Bid} from "../models/bid";
 export class Order extends Model {
 
 }
@@ -32,6 +32,13 @@ Order.init(
     //professional_empl: {type:INTEGER}, also..
     is_invitor: {type:BOOLEAN},
     is_cmdr: {type:BOOLEAN},
+    // win_bid:{
+    //   type: INTEGER,
+    //   references: {
+    //     model: Bid, // Can be both a string representing the table name or a Sequelize model
+    //     key: 'bid_id'
+    //   }
+    // }
   },
   { sequelize, modelName: 'Order' }
 )
