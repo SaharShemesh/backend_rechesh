@@ -18,27 +18,31 @@ export const validate_sellItem = (
     where: {
       item_id: sellItem_id,
     },
+    attributes: ["sub_order"],
   })
     .then((sell_Item: Sell_Item) => {
+      if (!sell_Item) throw false;
+
       return Order.findOne({
         where: {
           //@ts-ignore
           id: sell_Item.sub_order,
         },
-      })
-        .then((Order: Order) => {
-          return MN_Order.findOne({
-            where: {
-              //@ts-ignore
-              id: Order.mn_order,
-            },
-          })
-            .then(() => true)
-            .catch(() => 3);
-        })
-        .catch(() => 2);
+      });
     })
-    .catch(() => 1);
+    .then((Order: Order) => {
+      return MN_Order.findOne({
+        where: {
+          //@ts-ignore
+          id: Order.mn_order,
+        },
+        attributes: ["id"],
+      });
+    })
+    .then((main_order: any) => {
+      return main_order.id == mainOrder_id;
+    })
+    .catch((error) => error);
 };
 
 export const delete_sellItem = (id: number) => {
