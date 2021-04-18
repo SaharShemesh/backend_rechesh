@@ -87,12 +87,13 @@ export const post_order = (details: any) => {
         details.Order.Sell_items.map((sell: any) => {
           //@ts-ignore
           return order.createSell_item(sell);
-        })
+        }),
       );
     })
     .then(() => {
-      return "created";
-    });
+      return true;
+    })
+    .catch((error) => error);
 };
 
 export const find_one = (id: number) => {

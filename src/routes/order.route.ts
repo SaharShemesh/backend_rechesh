@@ -1,13 +1,11 @@
-import express,{Request, Response} from 'express'
+import express, { Request, Response } from "express";
 
-const singular_router = express.Router();
-const plural_router = express.Router();
+import { create_order } from "../controllers/order.controller";
+const singular_router = express.Router({ mergeParams: true });
+const plural_router = express.Router({ mergeParams: true });
 
 //singular router
-
-  //
+singular_router.post("/", create_order);
 //plural router
 
-
-
-export {singular_router,plural_router};
+export { singular_router, plural_router };

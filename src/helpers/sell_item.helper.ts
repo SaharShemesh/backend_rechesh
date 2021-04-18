@@ -12,7 +12,7 @@ export const findAll = (sub_order: number) => {
 
 export const validate_sellItem = (
   mainOrder_id: number,
-  sellItem_id: number
+  sellItem_id: number,
 ) => {
   return Sell_Item.findOne({
     where: {
@@ -21,13 +21,14 @@ export const validate_sellItem = (
     attributes: ["sub_order"],
   })
     .then((sell_Item: Sell_Item) => {
-      if (!sell_Item) throw false;
+      if (!sell_Item) throw 1;
 
       return Order.findOne({
         where: {
           //@ts-ignore
           id: sell_Item.sub_order,
         },
+        attributes: ["mn_order"],
       });
     })
     .then((Order: Order) => {

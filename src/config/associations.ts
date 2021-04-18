@@ -260,7 +260,7 @@ export default function load_associations() {
 
   // sync db
   sequelize
-    .sync({ force: true })
+    .sync({ alter: true })
     .then(() => console.log("success"))
     .catch((e) => console.log("faliur", e));
 }
