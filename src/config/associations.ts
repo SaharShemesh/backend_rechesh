@@ -195,6 +195,21 @@ export default function load_associations() {
     foreignKey: "location_id",
   });
 
+  models.Bim.hasMany(models.Base_Hierarchy, {
+    foreignKey: "bim_id",
+    as: "locations",
+  });
+  models.Base_Hierarchy.belongsTo(models.Bim, {
+    foreignKey: "bim_id",
+    as: "bim",
+  });
+
+  models.Bim.belongsTo(models.Unit, {
+    foreignKey: "unit_id",
+  });
+  models.Unit.hasMany(models.Bim, {
+    foreignKey: "unit_id",
+  });
   // //     //User_Premissions & User
   models.User.belongsTo(models.User_Permissions, {
     foreignKey: "permission_id",

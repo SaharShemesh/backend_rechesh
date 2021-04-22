@@ -33,7 +33,7 @@ export let create_order = (req: Request, res: Response, next: NextFunction) => {
       sub_orders = sub_orders.map(
         (sell_item: { sub_order: any }) => sell_item.sub_order,
       );
-      console.log(sub_orders);
+
       sub_order = parseInt(sub_orders[0]);
       //@ts-ignore
       return sub_orders.every((sub_order) => sub_order == sub_orders[0]);
