@@ -11,6 +11,17 @@ export default function load_associations() {
   models.User.hasOne(models.Order, {
     foreignKey: "Bim_commander",
   });
+  //prefferd proffesional_att
+  models.Order.belongsTo(models.Soldier, {
+    foreignKey: "Professional_at",
+    as: "proffesional_authority",
+  });
+  models.Soldier.hasMany(models.Order, {
+    foreignKey: "Professional_at",
+  });
+  models.Soldier.hasMany(models.Order, {
+    foreignKey: "Professional_at1",
+  });
   //proffesional_att1
   models.Order.belongsTo(models.Soldier, {
     foreignKey: "Professional_at1",
@@ -116,13 +127,13 @@ export default function load_associations() {
     foreignKey: "order_type",
   });
 
-  //   //Paka_Type & Order
-  models.Order.belongsTo(models.Paka_Type, {
-    foreignKey: "Paka_type",
-  });
-  models.Paka_Type.hasMany(models.Order, {
-    foreignKey: "Paka_type",
-  });
+  //Paka_Type & Order
+  // models.Order.belongsTo(models.Paka_Type, {
+  //   foreignKey: "Paka_type",
+  // });
+  // models.Paka_Type.hasMany(models.Order, {
+  //   foreignKey: "Paka_type",
+  // });
 
   //   //Paka & Order
   models.Order.belongsTo(models.Paka, {
@@ -211,11 +222,11 @@ export default function load_associations() {
     foreignKey: "unit_id",
   });
   // //     //User_Premissions & User
-  models.User.belongsTo(models.User_Permissions, {
+  models.User.belongsTo(models.User_Permission, {
     foreignKey: "permission_id",
     as: "Permission",
   });
-  models.User_Permissions.hasMany(models.User, {
+  models.User_Permission.hasMany(models.User, {
     foreignKey: "permission_id",
   });
 

@@ -75,11 +75,17 @@ export const findAll = () => {
 
 export const get_status = (id: number) => {
   return Order.findOne({
+    raw: true,
+    attributes: ["id", "status"],
     where: {
-      attributes: ["id", "status"],
-      //@ts-ignore
+      id,
     },
-  })
-    .then((order: any) => order.status)
-    .catch();
+  }).then((order: any) => {
+    if (!order)
+      throw {
+        status: 500,
+        message: "status was not found",
+      };
+    return order.status;
+  });
 };

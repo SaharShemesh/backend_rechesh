@@ -16,7 +16,7 @@ import { Soldier } from "./soldier";
 import { Status_History } from "./status_history";
 import { Status } from "./status";
 import { Unit } from "./unit";
-import { User_Permissions } from "./user_permissions";
+import { User_Permission } from "./user_permissions";
 import { User_Roles } from "./user_roles";
 import { Sell_Item } from "./sell_item";
 import { Bid } from "./bid";
@@ -44,7 +44,7 @@ export {
   Status_History,
   Status,
   Unit,
-  User_Permissions,
+  User_Permission,
   User_Roles,
   Order,
   Sell_Item,

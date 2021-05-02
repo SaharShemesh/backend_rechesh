@@ -1,11 +1,23 @@
 import { NextFunction, Request, Response } from "express";
 import * as order_helper from "../helpers/Order.helper";
 import * as sell_Item_helper from "../helpers/sell_item.helper";
-import { MN_Order, Order, Sell_Item } from "../models";
+import {
+  Budget_Type,
+  MN_Order,
+  Order,
+  Order_Type,
+  Paka,
+  Procument_Type,
+  Pulling_Bag,
+  Sell_Item,
+  Soldier,
+  User,
+} from "../models";
+
 export let create_order = (req: Request, res: Response, next: NextFunction) => {
   let sell_items: any[] = req.body.sell_items;
   let sub_order: number, new_order: number;
-  let req_id = parseInt(req.params.order_id);
+  let req_id = parseInt(req.params.req_id);
   console.log(req.params);
   return Promise.all(
     sell_items.map((sellitem_id: number) =>
@@ -42,7 +54,7 @@ export let create_order = (req: Request, res: Response, next: NextFunction) => {
       if (!all_same)
         throw {
           status: 400,
-          er: "not all sell_items belong to the same sub order",
+          message: "not all sell_items belong to the same sub order",
         };
       return Order.findOne({
         where: {
@@ -69,7 +81,178 @@ export let create_order = (req: Request, res: Response, next: NextFunction) => {
       return new_ordr.setSell_items(sell_items);
     })
     .then(() => res.status(201).json({ message: "created", new_order }))
-    .catch((error) => res.status(error.status).json({ error: error.er }));
+    .catch((error) => next(error));
 };
 
-let update_order = (req: Request, res: Response, n: NextFunction) => {};
+export let update_order = (req: Request, res: Response, nx: NextFunction) => {
+  let req_id = parseInt(req.params.req_id);
+  let order_id = parseInt(req.params.order_id);
+  let body: any = {};
+  let new_status: number;
+  return Order.findOne({
+    where: {
+      id: order_id,
+    },
+  })
+    .then(async (order: any) => {
+      if (order.mn_order != req_id)
+        throw {
+          status: 400,
+          message: "order is not sit under the given request",
+        };
+
+      if (req.body.order_type) {
+        let order_type = await Order_Type.findOne({
+          where: {
+            type_id: req.body.order_type,
+          },
+        });
+        if (!order_type)
+          throw {
+            status: 400,
+            message: "order type was not found on the system",
+          };
+      }
+      if (req.body.budget_type) {
+        let budget_type = await Budget_Type.findOne({
+          where: {
+            type_id: req.body.budget_type,
+          },
+        });
+        if (!budget_type)
+          throw {
+            status: 400,
+            message: "budget type was not found on the system",
+          };
+      }
+      if (req.body.procument_type) {
+        let procument_type = await Procument_Type.findOne({
+          where: {
+            type_id: req.body.procument_type,
+          },
+        });
+        if (!procument_type)
+          throw {
+            status: 400,
+            message: "procument type was not found on the system",
+          };
+      }
+
+      if (req.body.pulling_bag) {
+        let pulling_bag = await Pulling_Bag.findOne({
+          where: {
+            bag_id: req.body.pulling_bag,
+          },
+        });
+        if (!pulling_bag)
+          throw {
+            status: 400,
+            message: "pulling bag was not found on the system",
+          };
+      }
+
+      if (req.body.Professional_at) {
+        let Professional_athority = await Soldier.findOne({
+          where: {
+            id: req.body.Professional_at,
+          },
+        });
+        if (!Professional_athority)
+          throw {
+            status: 400,
+            message: "athority was not found on the system",
+          };
+      }
+
+      if (req.body.assignment_id) {
+        let assignment_nu = await Budget_Type.findOne({
+          where: {
+            assignment_id: req.body.assignment_id,
+          },
+        });
+        if (!assignment_nu)
+          throw {
+            status: 400,
+            message: "assignment numb was not found on the system",
+          };
+      }
+
+      if (req.body.paka) {
+        let paka_ia = await Paka.findOne({
+          where: {
+            paka: req.body.paka,
+          },
+        });
+        if (!paka_ia)
+          throw {
+            status: 400,
+            message: "paka was not found on the system",
+          };
+      }
+
+      if (req.body.Bim_commander) {
+        let bim_commander = await User.findOne({
+          where: {
+            id: req.body.Bim_commander,
+            //role_id:2 TODO: for bim_commander
+          },
+        });
+        if (!bim_commander)
+          throw {
+            status: 400,
+            message: "bim commander was not found on the system",
+          };
+      }
+
+      if (req.body.Professional_at1) {
+        let p_athr = await Soldier.findOne({
+          where: {
+            id: req.body.Professional_at1,
+          },
+        });
+        if (!p_athr)
+          throw {
+            status: 400,
+            message: "othority 1 was not found on the system",
+          };
+      }
+
+      if (req.body.Professional_at2) {
+        let prof = await Paka.findOne({
+          where: {
+            id: req.body.Professional_at2,
+          },
+        });
+        if (!prof)
+          throw {
+            status: 400,
+            message: "athority 2 was not found on the system",
+          };
+      }
+
+      let status = await order_helper.get_status(order_id);
+      if (status == 1) {
+        if (!req.body.created_document) {
+          //@ts-ignore
+          new_status = 2;
+        } else {
+          //@ts-ignore
+          new_status = 3;
+        }
+      } else if (status == 2) {
+        if (req.body.created_document) new_status = 3;
+      } else if (status < 6 && req.body.erp_req) new_status = 6;
+      if (status < 7 && req.body.erp_order) if (order.erp_req) new_status = 7;
+
+      if (new_status) await order.setStatus(new_status);
+      if (order.document_created) req.body.document_created = true;
+      console.log(req.body);
+      return Order.update(req.body, {
+        where: {
+          id: order_id,
+        },
+      });
+    })
+    .then(() => res.status(200).json({ message: "success" }))
+    .catch((er) => nx(er));
+};

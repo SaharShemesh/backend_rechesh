@@ -1,14 +1,12 @@
-import { Model,INTEGER,STRING } from 'sequelize'
-import sequelize from './init';
+import { Model, INTEGER, STRING } from "sequelize";
+import sequelize from "./init";
 
-export class User_Permissions extends Model {
+export class User_Permission extends Model {}
 
-}
-
-User_Permissions.init(
+User_Permission.init(
   {
-    permission_id: {type:INTEGER,primaryKey:true,autoIncrement:true},
-    permission: {type:STRING},
+    permission_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    permission: { type: STRING },
   },
-  { sequelize, modelName: 'User_permissions' }
-)
+  { sequelize, modelName: "User_permission" },
+);
