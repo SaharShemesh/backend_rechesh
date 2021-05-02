@@ -8,7 +8,7 @@ export default function load_associations() {
     foreignKey: "Bim_commander",
     as: "bim_commander",
   });
-  models.User.hasOne(models.Order, {
+  models.User.hasMany(models.Order, {
     foreignKey: "Bim_commander",
   });
   //proffesional_att1

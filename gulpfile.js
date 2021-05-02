@@ -29,7 +29,7 @@ gulp.task(
     return nodemon({
       ext: "ts json",
       script: "build/server.js",
-      watch: ["src/**/*.js", "!node_modules/**/*.js"],
+      watch: ["src/**/*.ts", "!node_modules/**/*.js"],
       legacyWatch: true,
       tasks: ["build_proj"],
     });

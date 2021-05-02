@@ -10,7 +10,7 @@ Constants.init(
     condition: { type: STRING },
     price_value: { type: STRING },
   },
-  { sequelize, modelName: "constants" }
+  { sequelize, modelName: "constants" },
 );
 
 //seeders
@@ -42,7 +42,7 @@ Constants.sync({ force: true }).then(() => {
       fields: ["type", "condition", "price_value"],
       ignoreDuplicates: true,
       updateOnDuplicate: ["type", "condition", "price_value"],
-    }
+    },
   )
     //})
     .then(() => console.log("constants were created"));

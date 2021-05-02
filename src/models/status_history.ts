@@ -14,7 +14,7 @@ Status_History.init(
     new_value: { type: STRING },
     old_value: { type: DATEONLY },
   },
-  { sequelize, modelName: "status_history" }
+  { sequelize, modelName: "status_history" },
 );
 
 //seeders
@@ -23,10 +23,10 @@ Status_History.sync({ force: true }).then(() => {
     [
       {
         comments: "הערה ראשונה",
-        status: "1",
-        order: "1",
-        part: "1",
-        field_index: "1",
+        status: 1,
+        order: 1,
+        part: 1,
+        field_index: 1,
         new_value: "זה אמור להיות סטרינג?",
         old_value: "23.06.2021",
       },
@@ -78,7 +78,7 @@ Status_History.sync({ force: true }).then(() => {
         "new_value",
         "old_value",
       ],
-    }
+    },
   )
     //})
     .then(() => console.log("Statuses histories were created"));

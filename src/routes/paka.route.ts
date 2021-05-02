@@ -1,11 +1,12 @@
-import express, { Request, Response } from "express";
-import { get_all } from "../controllers/user.controller";
+import express from "express";
+import { get_all, get_one, create_one } from "../controllers/paka.controller";
 const singular_router = express.Router();
 const plural_router = express.Router();
 
 //singular router
-// singular_router.post("/",create_user);
-// singular_router.get("/:id",get_user);
+//
+singular_router.get("/:id", get_one);
+singular_router.post("/", create_one);
 //
 //plural router
 plural_router.get("/", get_all);

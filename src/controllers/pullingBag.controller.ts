@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Procument_Type } from "../models";
+import { Pulling_Bag } from "../models";
 
 export const get_all = async (
   req: Request,
@@ -7,8 +7,8 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let types = await Procument_Type.findAll({ raw: true });
-    res.status(200).json(types);
+    let data = await Pulling_Bag.findAll({ raw: true });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -21,13 +21,13 @@ export const get_one = async (
 ) => {
   let id = parseInt(req.params.id);
   try {
-    let data = await Procument_Type.findAll({
+    let types = await Pulling_Bag.findAll({
       raw: true,
       where: {
-        type_id: id,
+        id: id,
       },
     });
-    res.status(200).json(data);
+    res.status(200).json(types);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -40,12 +40,18 @@ export const create_one = async (
   next: NextFunction,
 ) => {
   try {
-    let name = req.body.type_name;
-    let output = await Procument_Type.create({ type: name });
+    let num = req.body.bag_number;
+    let desc = req.body.bag_description;
+    let sum = req.body.sum_budget;
+    let output = await Pulling_Bag.create({
+      bag_number: num,
+      bag_description: desc,
+      sum_budget: sum,
+    });
     if (output) {
-      res.status(201).json({ message: "procument type was created!" });
+      res.status(201).json({ message: "Pulling bag was created!" });
     } else {
-      res.status(400).json({ error: "problem in creating this type" });
+      res.status(400).json({ error: "problem in creating this pulling bag" });
     }
   } catch (e) {
     res.status(500).json({ error: "internal error" });

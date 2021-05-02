@@ -2,7 +2,6 @@ import { Model, INTEGER, STRING } from "sequelize";
 import sequelize from "./init";
 
 export class Base_Hierarchy extends Model {}
-
 Base_Hierarchy.init(
   {
     location_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -10,7 +9,7 @@ Base_Hierarchy.init(
     department_name: { type: STRING },
     unit_name: { type: STRING },
   },
-  { sequelize, modelName: "base_hierarchy" }
+  { sequelize, modelName: "base_hierarchy" },
 );
 
 //seeders
@@ -28,6 +27,51 @@ Base_Hierarchy.sync({ force: true }).then(() => {
         department_name: "PMO",
       },
       {
+        unit_name: "תוהן",
+        bim_name: "מתן",
+        department_name: "תוכניות עבודה",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "מתן",
+        department_name: "משאבים",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "אוהד",
+        department_name: "הדרכה",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "אוהד",
+        department_name: "איכות",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "אוהד",
+        department_name: "מרכז אחזקה",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "אוהד",
+        department_name: "בינוי",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "גלא",
+        department_name: "מחסן שירות",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "גלא",
+        department_name: "מחסן רגיל",
+      },
+      {
+        unit_name: "תוהן",
+        bim_name: "תחום מכני",
+        department_name: "קרונות",
+      },
+      {
         unit_name: "מופת",
         bim_name: "לוחמה אלקטרונית",
         department_name: "ספקים",
@@ -42,7 +86,7 @@ Base_Hierarchy.sync({ force: true }).then(() => {
       fields: ["unit_name", "bim_name", "department_name"],
       ignoreDuplicates: true,
       updateOnDuplicate: ["unit_name", "bim_name", "department_name"],
-    }
+    },
   )
     //})
     .then(() => console.log("base_hierarchy were created"));
