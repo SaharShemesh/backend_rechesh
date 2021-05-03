@@ -68,6 +68,7 @@ module.exports = {
         unit: "יחידה 502",
       },
     ]);
+
     //bims
     await queryInterface.bulkInsert("bims", [
       {
