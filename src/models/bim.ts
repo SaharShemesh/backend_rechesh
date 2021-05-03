@@ -1,13 +1,13 @@
 import { Model, INTEGER, STRING } from "sequelize";
 import sequelize from "./init";
 
-export class Creator extends Model {}
+export class Bim extends Model {}
 
-Creator.init(
+Bim.init(
   {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    creator_name: { type: STRING },
-    creator_num: { type: STRING },
+    bim_name: { type: STRING },
+    //unit_id:{type:INTEGER}
   },
-  { sequelize, modelName: "creator" },
+  { sequelize, modelName: "bim" },
 );

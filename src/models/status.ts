@@ -10,32 +10,55 @@ Status.init(
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     status: { type: STRING },
   },
-  { sequelize, modelName: "status" }
+  { sequelize, modelName: "status" },
 );
-
 //seeders
 Status.sync({ force: true }).then(() => {
   Status.bulkCreate(
     [
       {
-        status: "מעולה",
+        status: "ממתין לאישור מחלקת רכש",
       },
       {
-        status: "סבבה",
+        status: "ממתין לשליחת בקשה להצעה",
       },
       {
-        status: "אוקיי",
+        status: "נשלח לספקים",
       },
       {
-        status: "גרוע",
+        status: "סבב אישורים",
+      },
+      {
+        status: "סבב אישורים הסתיים",
+      },
+      {
+        status: "נפתחה דרישה במערכת מידע",
+      },
+      {
+        status: "נפתחה הזמנה במערכת מידע ממתין לאישור הספק להזמנה",
+      },
+      {
+        status: "ממתין להגעת הפריט לבסיס או לאיסוף הפריט מהחנות",
+      },
+      {
+        status: "ממתין לאיסוף המזמין מהמחלקה",
+      },
+      {
+        status: "טיפול חריגים",
+      },
+      {
+        status: "הזמנה טופלה",
+      },
+      {
+        status: "בעיית תשלום לספק",
       },
     ],
     {
       fields: ["status"],
       ignoreDuplicates: true,
       updateOnDuplicate: ["status"],
-    }
+    },
   )
     //})
-    .then(() => console.log("Statuses were created"));
+    .then(() => console.log("units where created"));
 });

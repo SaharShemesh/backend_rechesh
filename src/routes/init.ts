@@ -33,8 +33,8 @@ export function initRoutes(app: Express) {
   app.use("/api/Main-Orders", main_orders.plural_router);
   app.use("/api/Main-Order", main_orders.singular_router);
 
-  app.use("/api/Main-Orders/:order_id/order", order_route.singular_router);
-  app.use("/api/Main-Orders/:order_id/orders", order_route.plural_router);
+  app.use("/api/Main-Orders/:req_id/order", order_route.singular_router);
+  app.use("/api/Main-Orders/:req_id/orders", order_route.plural_router);
 
   app.use("/api/User", user_route.singular_router);
   app.use("/api/Users", user_route.plural_router);
