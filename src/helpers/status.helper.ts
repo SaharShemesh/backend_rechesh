@@ -7,10 +7,11 @@ export const validate_status = (id: number, ...statuses: number[]) => {
       id,
     },
     attributes: ["status"],
-  }).then((order: any) => {
-    if (!order) throw false;
-
-    let status = order.status;
-    return statuses.find((status_value) => status_value == status) != undefined;
-  });
+  })
+    .then((order: any) => {
+      if (!order) throw false;
+      let status = order.status;
+      return statuses.some((status_value) => status_value == status);
+    })
+    .catch((error) => error);
 };
