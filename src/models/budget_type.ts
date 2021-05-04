@@ -9,32 +9,32 @@ Budget_Type.init(
     type_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: STRING },
   },
-  { sequelize, modelName: "budget_type" }
+  { sequelize, modelName: "budget_type" },
 );
 
-//seeders
-Budget_Type.sync({ force: true }).then(() => {
-  Budget_Type.bulkCreate(
-    [
-      {
-        type: "סוג אחד",
-      },
-      {
-        type: "סוג שני",
-      },
-      {
-        type: "עוד איזה סוג",
-      },
-      {
-        type: "סוג יפה כזה",
-      },
-    ],
-    {
-      fields: ["type"],
-      ignoreDuplicates: true,
-      updateOnDuplicate: ["type"],
-    }
-  )
-    //})
-    .then(() => console.log("budget_types were created"));
-});
+// //seeders
+// Budget_Type.sync({ force: true }).then(() => {
+//   Budget_Type.bulkCreate(
+//     [
+//       {
+//         type: "סוג אחד",
+//       },
+//       {
+//         type: "סוג שני",
+//       },
+//       {
+//         type: "עוד איזה סוג",
+//       },
+//       {
+//         type: "סוג יפה כזה",
+//       },
+//     ],
+//     {
+//       fields: ["type"],
+//       ignoreDuplicates: true,
+//       updateOnDuplicate: ["type"],
+//     }
+//   )
+//     //})
+//     .then(() => console.log("budget_types were created"));
+// });

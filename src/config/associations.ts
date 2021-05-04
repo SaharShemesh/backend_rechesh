@@ -76,7 +76,7 @@ export default function load_associations() {
     foreignKey: "sub_order",
   });
 
-  //   //assigment & Order
+  //   //assignment & Order
   models.Order.belongsTo(models.Assignment, {
     foreignKey: "assignment_id",
   });
