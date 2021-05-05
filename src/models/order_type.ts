@@ -8,7 +8,7 @@ Order_Type.init(
     type_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: STRING },
   },
-  { sequelize, modelName: "order_type" }
+  { sequelize, modelName: "order_type" },
 );
 
 //seeders
@@ -16,23 +16,20 @@ Order_Type.sync({ force: true }).then(() => {
   Order_Type.bulkCreate(
     [
       {
-        type: "סוג אחד",
+        type: "רכש בהקפה",
       },
       {
-        type: "סוג שני",
+        type: "רכש בדרישה",
       },
       {
-        type: "עוד איזה סוג",
-      },
-      {
-        type: "סוג יפה כזה",
+        type: "רכש במשיכה",
       },
     ],
     {
       fields: ["type"],
       ignoreDuplicates: true,
       updateOnDuplicate: ["type"],
-    }
+    },
   )
     //})
     .then(() => console.log("Order types were created"));

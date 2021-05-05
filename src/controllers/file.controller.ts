@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Procument_Type } from "../models";
+import { File } from "../models";
 
 export const get_all = async (
   req: Request,
@@ -7,8 +7,8 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let types = await Procument_Type.findAll({ raw: true });
-    res.status(200).json(types);
+    let data = await File.findAll({ raw: true });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -21,13 +21,13 @@ export const get_one = async (
 ) => {
   let id = parseInt(req.params.id);
   try {
-    let data = await Procument_Type.findAll({
+    let types = await File.findAll({
       raw: true,
       where: {
-        type_id: id,
+        id: id,
       },
     });
-    res.status(200).json(data);
+    res.status(200).json(types);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -40,12 +40,20 @@ export const create_one = async (
   next: NextFunction,
 ) => {
   try {
-    let name = req.body.type_name;
-    let output = await Procument_Type.create({ type: name });
+    let name = req.body.name;
+    let mainReq = req.body.main_request;
+    let secReq = req.body.secondary_request;
+    let bidId = req.body.bd_id;
+    let output = await File.create({
+      name: name,
+      main_request: mainReq,
+      secondary_request: secReq,
+      bd_id: bidId,
+    });
     if (output) {
-      res.status(201).json({ message: "procument type was created!" });
+      res.status(201).json({ message: "file was created!" });
     } else {
-      res.status(400).json({ error: "problem in creating this type" });
+      res.status(400).json({ error: "problem in creating this file" });
     }
   } catch (e) {
     res.status(500).json({ error: "internal error" });

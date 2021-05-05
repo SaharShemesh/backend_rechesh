@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Procument_Type } from "../models";
+import { Constants } from "../models";
 
 export const get_all = async (
   req: Request,
@@ -7,8 +7,8 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let types = await Procument_Type.findAll({ raw: true });
-    res.status(200).json(types);
+    let data = await Constants.findAll({ raw: true });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -21,13 +21,13 @@ export const get_one = async (
 ) => {
   let id = parseInt(req.params.id);
   try {
-    let data = await Procument_Type.findAll({
+    let types = await Constants.findAll({
       raw: true,
       where: {
-        type_id: id,
+        id: id,
       },
     });
-    res.status(200).json(data);
+    res.status(200).json(types);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
@@ -40,12 +40,18 @@ export const create_one = async (
   next: NextFunction,
 ) => {
   try {
-    let name = req.body.type_name;
-    let output = await Procument_Type.create({ type: name });
+    let name = req.body.type;
+    let con = req.body.condition;
+    let priVal = req.body.price_value;
+    let output = await Constants.create({
+      type: name,
+      condition: con,
+      price_value: priVal,
+    });
     if (output) {
-      res.status(201).json({ message: "procument type was created!" });
+      res.status(201).json({ message: "Constants were created!" });
     } else {
-      res.status(400).json({ error: "problem in creating this type" });
+      res.status(400).json({ error: "problem in creating these constants" });
     }
   } catch (e) {
     res.status(500).json({ error: "internal error" });
