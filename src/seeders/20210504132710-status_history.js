@@ -47,21 +47,20 @@ module.exports = {
       },
     ]);
 
-    //user roles
-    await queryInterface.bulkInsert("orders", [
-      {
-        order: 1
-      },
-      {
-        order: 5
-      },
-      {
-        order: 7
-      },
-      {
-        order: 12
-      },
-    ]);
+    // await queryInterface.bulkInsert("orders", [
+    //   {
+    //     order: 1
+    //   },
+    //   {
+    //     order: 5
+    //   },
+    //   {
+    //     order: 7
+    //   },
+    //   {
+    //     order: 12
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -18,11 +18,11 @@ module.exports = {
         unit_id: 1
       },
       {
-        assignment_number: "מצפן",
+        bim_name: "מצפן",
         unit_id: 2
       },
       {
-        assignment_number: "נשר",
+        bim_name: "נשר",
         unit_id: 3
       },
     ]);
