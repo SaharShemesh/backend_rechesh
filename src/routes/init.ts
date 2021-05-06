@@ -24,6 +24,7 @@ import * as paka_route from "./paka.route";
 import * as pullingBag_route from "./pulling_Bag.controller";
 import * as soldier_route from "./soldier.route";
 import * as statusHistory_route from "./status_History.route";
+import * as bim_route from "./bim.route";
 
 export function initRoutes(app: Express) {
   app.get("/api", (request: Request, response: Response) => {
@@ -52,6 +53,10 @@ export function initRoutes(app: Express) {
   //procument Type
   app.use("/api/Procument-Type", procument_route.singular_router);
   app.use("/api/Procument-Types", procument_route.plural_router);
+
+  //bims
+  app.use("/api/Bim", bim_route.singular_router);
+  app.use("/api/Bims", bim_route.plural_router);
 
   //Assignment
   app.use("/api/Assignment", assignment_route.singular_router);
@@ -90,8 +95,8 @@ export function initRoutes(app: Express) {
   app.use("/api/Units", unit_route.plural_router);
 
   //User Premissions
-  app.use("/api/User-Permissions", userPermissions_route.singular_router);
-  app.use("/api/Users-Permissions", userPermissions_route.plural_router);
+  app.use("/api/User-Permission", userPermissions_route.singular_router);
+  app.use("/api/User-Permissions", userPermissions_route.plural_router);
 
   //User Roles
   app.use("/api/User-Roles", userRoles_route.singular_router);

@@ -12,28 +12,28 @@ Assignment.init(
 );
 
 //seeders
-Assignment.sync({ force: true }).then(() => {
-  Assignment.bulkCreate(
-    [
-      {
-        assignment_number: "9085783426",
-      },
-      {
-        assignment_number: "4892375845",
-      },
-      {
-        assignment_number: "9587258014",
-      },
-      {
-        assignment_number: "4328794201",
-      },
-    ],
-    {
-      fields: ["assignment_number"],
-      ignoreDuplicates: true,
-      updateOnDuplicate: ["assignment_number"],
-    },
-  )
-    //})
-    .then(() => console.log("assignments were created"));
-});
+// Assignment.sync({ force: true }).then(() => {
+//   Assignment.bulkCreate(
+//     [
+//       {
+//         assignment_number: "משימה",
+//       },
+//       {
+//         assignment_number: "משימה 2",
+//       },
+//       {
+//         assignment_number: "משימה 3",
+//       },
+//       {
+//         assignment_number: "משימה 4",
+//       },
+//     ],
+//     {
+//       fields: ["assignment_number"],
+//       ignoreDuplicates: true,
+//       updateOnDuplicate: ["assignment_number"],
+//     }
+//   )
+//     //})
+//     .then(() => console.log("assignments were created"));
+// });

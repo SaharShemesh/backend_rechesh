@@ -76,7 +76,7 @@ export default function load_associations() {
     foreignKey: "sub_order",
   });
 
-  //   //assigment & Order
+  //   //assignment & Order
   models.Order.belongsTo(models.Assignment, {
     foreignKey: "assignment_id",
   });
@@ -286,7 +286,7 @@ export default function load_associations() {
 
   // sync db
   sequelize
-    .sync({ alter: true })
+    .sync({ force: true })
     .then(() => console.log("success"))
     .catch((e) => console.log("faliur", e));
 }

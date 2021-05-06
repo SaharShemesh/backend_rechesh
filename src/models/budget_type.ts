@@ -12,29 +12,29 @@ Budget_Type.init(
   { sequelize, modelName: "budget_type" },
 );
 
-//seeders
-Budget_Type.sync({ force: true }).then(() => {
-  Budget_Type.bulkCreate(
-    [
-      {
-        type: "מטלה תקציבית",
-      },
-      {
-        type: "אישור מנהל לתקציב בסיסיי",
-      },
-      {
-        type: "מצמ",
-      },
-      {
-        type: "פרויקטנט",
-      },
-    ],
-    {
-      fields: ["type"],
-      ignoreDuplicates: true,
-      updateOnDuplicate: ["type"],
-    },
-  )
-    //})
-    .then(() => console.log("budget_types were created"));
-});
+// //seeders
+// Budget_Type.sync({ force: true }).then(() => {
+//   Budget_Type.bulkCreate(
+//     [
+//       {
+//         type: "סוג אחד",
+//       },
+//       {
+//         type: "סוג שני",
+//       },
+//       {
+//         type: "עוד איזה סוג",
+//       },
+//       {
+//         type: "סוג יפה כזה",
+//       },
+//     ],
+//     {
+//       fields: ["type"],
+//       ignoreDuplicates: true,
+//       updateOnDuplicate: ["type"],
+//     }
+//   )
+//     //})
+//     .then(() => console.log("budget_types were created"));
+// });

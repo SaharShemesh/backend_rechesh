@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-
+   
     //units
     await queryInterface.bulkInsert("units", [
       {
@@ -30,6 +30,7 @@ module.exports = {
         unit: "יחידה 502",
       },
     ]);
+
     //bims
     await queryInterface.bulkInsert("bims", [
       {
@@ -141,13 +142,14 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.dropTable("units");
-    await queryInterface.dropTable("bims");
-    await queryInterface.dropTable("base_hierarchies");
-    await queryInterface.dropTable("soldiers");
-    await queryInterface.dropTable("User_permissions");
-    await queryInterface.dropTable("User_roles");
-    await queryInterface.dropTable("users");
+    await queryInterface.bulkDelete("units");
+    await queryInterface.bulkDelete("bims");
+    await queryInterface.bulkDelete("base_hierarchies");
+    await queryInterface.bulkDelete("soldiers");
+    await queryInterface.bulkDelete("User_permissions");
+    await queryInterface.bulkDelete("User_roles");
+    await queryInterface.bulkDelete("users");
+    await queryInterface.bulkDelete("statuses");
     console.log("done");
   },
 };
