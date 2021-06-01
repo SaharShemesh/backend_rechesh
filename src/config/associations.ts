@@ -4,11 +4,11 @@ export default function load_associations() {
   //order
 
   //bim_commander
-  models.Order.belongsTo(models.User, {
+  models.Order.belongsTo(models.Soldier, {
     foreignKey: "Bim_commander",
     as: "bim_commander",
   });
-  models.User.hasOne(models.Order, {
+  models.Soldier.hasMany(models.Order, {
     foreignKey: "Bim_commander",
   });
   //prefferd proffesional_att
@@ -18,9 +18,6 @@ export default function load_associations() {
   });
   models.Soldier.hasMany(models.Order, {
     foreignKey: "Professional_at",
-  });
-  models.Soldier.hasMany(models.Order, {
-    foreignKey: "Professional_at1",
   });
   //proffesional_att1
   models.Order.belongsTo(models.Soldier, {
@@ -50,11 +47,11 @@ export default function load_associations() {
   });
   //all bids connected to specific order
   models.Order.hasMany(models.Bid, {
-    foreignKey: "order",
+    foreignKey: "order_id",
     as: "Bids",
   });
   models.Bid.belongsTo(models.Order, {
-    foreignKey: "order",
+    foreignKey: "order_id",
   });
   //   //win_bid
   models.Bid.hasOne(models.Order, {
@@ -185,14 +182,21 @@ export default function load_associations() {
     otherKey: "item_id",
   });
 
+  models.Bid.belongsTo(models.Provider, {
+    foreignKey: "Provider",
+  });
+  models.Provider.hasMany(models.Bid, {
+    foreignKey: "Provider",
+  });
   //main_order
   //User & Main Order
-  models.MN_Order.belongsTo(models.User, {
+  models.MN_Order.belongsTo(models.Soldier, {
     foreignKey: "customer_id",
     as: "Customer",
   });
-  models.User.hasMany(models.MN_Order, {
+  models.Soldier.hasMany(models.MN_Order, {
     foreignKey: "customer_id",
+    as: "main_orders",
   });
 
   //  //user
@@ -270,23 +274,23 @@ export default function load_associations() {
   });
 
   // //  //Unit & Sell_Item
-  models.Sell_Item.belongsTo(models.Unit, {
-    foreignKey: "unit",
-    as: "Unit",
-  });
-  models.Unit.hasMany(models.Sell_Item, {
-    foreignKey: "unit",
-  });
+  // models.Sell_Item.belongsTo(models.Unit, {
+  //   foreignKey: "unit",
+  //   as: "Unit",
+  // });
+  // models.Unit.hasMany(models.Sell_Item, {
+  //   foreignKey: "unit",
+  // });
 
   //   //bid
 
   //   //File & Bid
-  models.Bid.belongsTo(models.File);
-  models.File.hasMany(models.Bid);
+  models.File.belongsTo(models.Bid);
+  models.Bid.hasMany(models.File);
 
   // sync db
   sequelize
-    .sync({ force: true })
+    .sync({ alter: true })
     .then(() => console.log("success"))
     .catch((e) => console.log("faliur", e));
 }

@@ -2,6 +2,7 @@ import { Order } from "../models/order";
 import { MN_Order } from "../models/mn_order";
 import {
   Assignment,
+  Base_Hierarchy,
   Bid,
   Creator,
   Provider,
@@ -15,8 +16,18 @@ const fetching_format = {
   attributes: ["id"],
   include: [
     {
-      model: User,
+      model: Soldier,
       as: "Customer",
+      // //@ts-ignore
+      // include: [
+      //   {
+      //     model: Base_Hierarchy,
+      //     as: "Location",
+      //   },
+      //   {
+      //     model: Soldier,
+      //   },
+      // ],
     },
     {
       model: Order,
@@ -41,10 +52,10 @@ const fetching_format = {
               model: Creator,
               as: "Creator",
             },
-            {
-              model: Unit,
-              as: "Unit",
-            },
+            // {
+            //   model: Unit,
+            //   as: "Unit",
+            // },
           ],
         },
         {
@@ -79,7 +90,9 @@ export const findAll = () => {
 
 export const post_order = (details: any) => {
   return MN_Order.create(details)
-    .then((main_order: MN_Order) => {
+    .then(async (main_order: MN_Order) => {
+      //@ts-ignore
+      await main_order.setCustomer(1); // for testing
       //@ts-ignore
       return main_order.createOrder(details.Order);
     })

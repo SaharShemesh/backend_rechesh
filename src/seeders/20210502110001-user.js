@@ -171,6 +171,15 @@ module.exports = {
         role_id: 1,
       },
     ]);
+
+    await queryInterface.bulkInsert("Providers", [
+      {
+        provider_name: "הכל בזול",
+      },
+      {
+        provider_name: "הכל ביוקר",
+      },
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -180,14 +189,42 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("units");
-    await queryInterface.bulkDelete("bims");
-    await queryInterface.bulkDelete("base_hierarchies");
-    await queryInterface.bulkDelete("soldiers");
-    await queryInterface.bulkDelete("User_permissions");
-    await queryInterface.bulkDelete("User_roles");
-    await queryInterface.bulkDelete("users");
-    await queryInterface.bulkDelete("statuses");
+    await queryInterface.bulkDelete("units", null, {
+      truncate: true,
+      //cascade: false,
+    });
+    await queryInterface.bulkDelete("bims", null, {
+      truncate: true,
+      //cascade: false,
+    });
+    await queryInterface.bulkDelete("base_hierarchies", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    await queryInterface.bulkDelete("soldiers", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    await queryInterface.bulkDelete("User_permissions", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    await queryInterface.bulkDelete("User_roles", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    await queryInterface.bulkDelete("users", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    await queryInterface.bulkDelete("statuses", null, {
+      truncate: true,
+      // cascade: false,
+    });
+    //for squelite only
+    //await queryInterface.bulkDelete("sqlite_sequence");
+
+    //
     console.log("done");
   },
 };

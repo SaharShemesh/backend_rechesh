@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import * as order_helper from "../helpers/Order.helper";
 import * as sell_Item_helper from "../helpers/sell_item.helper";
 import {
+  Bid,
   Budget_Type,
   MN_Order,
   Order,
@@ -13,7 +14,27 @@ import {
   Soldier,
   User,
 } from "../models";
-
+export let return_customer = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let id = parseInt(req.params.order_id);
+  try {
+    await Order.update(
+      {
+        status: 1,
+      },
+      {
+        where: {
+          id,
+        },
+      },
+    );
+  } catch {
+    next({ message: "problem in returning to customer" });
+  }
+};
 export let create_order = (req: Request, res: Response, next: NextFunction) => {
   let sell_items: any[] = req.body.sell_items;
   let sub_order: number, new_order: number;
@@ -229,23 +250,53 @@ export let update_order = (req: Request, res: Response, nx: NextFunction) => {
             message: "athority 2 was not found on the system",
           };
       }
-
+      if (req.body.win_bid) {
+        let bid = await Bid.findOne({
+          where: {
+            bid_id: req.body.win_bid,
+            order_id,
+          },
+        });
+        if (!bid)
+          throw {
+            status: 400,
+            message: "bid was not found in this order",
+          };
+      }
+      //TODO: check if user send the request is administrator if(is_admin())
       let status = await order_helper.get_status(order_id);
+      let current_status = status;
       if (status == 1) {
-        if (!req.body.created_document) {
-          //@ts-ignore
-          new_status = 2;
-        } else {
-          //@ts-ignore
-          new_status = 3;
-        }
-      } else if (status == 2) {
-        if (req.body.created_document) new_status = 3;
-      } else if (status < 6 && req.body.erp_req) new_status = 6;
-      if (status < 7 && req.body.erp_order) if (order.erp_req) new_status = 7;
+        if (!req.body.created_document) status = 2;
+        else status = 3;
+      }
+      if (status == 2) {
+        if (req.body.created_document) status = 3;
+      }
+      if (
+        status == 3 &&
+        (req.body.win_bid || order.win_bid) &&
+        (req.body.Professional_at1 || order.Professional_at1) &&
+        (req.body.Professional_at2 || order.Professional_at2) &&
+        (req.body.Bim_commander || order.Bim_commander)
+      )
+        status = 4;
+      if (status == 5 && req.body.erp_req) status = 6;
+      if (status == 6 && req.body.erp_order) status = 7;
+      if ((status == 7 || status == 8) && req.body.invc) status = 9;
 
-      if (new_status) await order.setStatus(new_status);
-      if (order.document_created) req.body.document_created = true;
+      //back
+      if (status > 8 && req.body.invc == -1) status = 8;
+      if (status > 5) {
+        if (req.body.erp_req == -1) status = 5;
+        else if (req.body.erp_order == -1) status = 6;
+
+        if (req.body.erp_req == -1) req.body.erp_order = -1;
+        if (req.body.erp_order == -1) req.body.invc = -1;
+      }
+      if (status != current_status) await order.setStatus(status);
+      if (status > 6 && req.body.erp_order)
+        if (order.document_created) req.body.document_created = true;
       console.log(req.body);
       return Order.update(req.body, {
         where: {
@@ -255,4 +306,81 @@ export let update_order = (req: Request, res: Response, nx: NextFunction) => {
     })
     .then(() => res.status(200).json({ message: "success" }))
     .catch((er) => nx(er));
+};
+
+export let confirm_order = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  //TODO: get the id of the user send the request
+  let soldier_id: number = res.locals.user.soldier_id;
+  let field;
+  let id = parseInt(req.params.order_id);
+  let status = await order_helper.get_status(id);
+  if (status != 4)
+    next({ status: 401, message: "the order is not in confirm round" });
+  let order_confirmers: any = await Order.findOne({
+    attributes: ["Bim_commander", "Professional_at1", "Professional_at2"],
+    raw: true,
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: MN_Order,
+        attributes: ["customer_id"],
+        as: "main_order",
+      },
+    ],
+  });
+  if (!order_confirmers)
+    next({ status: 400, message: "this order was not found on the database" });
+  if (order_confirmers["Bim_commander"] == soldier_id) {
+    field = "is_cmdr";
+  } else if (order_confirmers["Professional_at1"] == soldier_id) {
+    field = "is_proffesional_at_1";
+  } else if (order_confirmers["Professional_at2"] == soldier_id) {
+    field = "is_proffesional_at_2";
+  } else if (order_confirmers["main_order.customer_id"] == soldier_id) {
+    field = "is_invitor";
+  }
+
+  if (field) {
+    Order.update(
+      { [field]: true },
+      {
+        where: {
+          id,
+        },
+      },
+    )
+      .then(function () {
+        return Order.findOne({
+          attributes: [
+            "is_cmdr",
+            "is_proffesional_at_1",
+            "is_proffesional_at_2",
+            "is_invitor",
+          ],
+          raw: true,
+          where: {
+            id,
+          },
+        });
+      })
+      .then(async (re: any) => {
+        if (!Object.values(re).some((x) => !x)) {
+          if (status == 4) await Order.update({ status: 5 }, { where: { id } });
+        }
+        res.status(200).json({ success: "your confirmession was saved" });
+      })
+      .catch((er) => {
+        next({ status: 500, message: er });
+      });
+  } else
+    next({
+      status: 401,
+      message: "you do not have the permission to confirm order",
+    });
 };

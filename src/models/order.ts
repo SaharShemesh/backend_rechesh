@@ -13,7 +13,7 @@ Order.init(
     //professional_at1: {type:INTEGER},
     //professional_at2: {type:INTEGER},
     //mn_order: {type:INTEGER},
-    document_created: { type: BOOLEAN },
+    document_created: { type: BOOLEAN, defaultValue: false },
     //status: {type:INTEGER, defaultValue:2},
     //bd: {type:INTEGER},
     erp_order: { type: STRING(12) },
@@ -30,14 +30,12 @@ Order.init(
     start_date: { type: DATEONLY, defaultValue: NOW },
     //invitor: {type:INTEGER}, unnessecery..
     //professional_empl: {type:INTEGER}, also..
-    is_invitor: { type: BOOLEAN },
-    is_cmdr: { type: BOOLEAN },
+    is_invitor: { type: BOOLEAN, defaultValue: false },
+    is_cmdr: { type: BOOLEAN, defaultValue: false },
+    is_proffesional_at_1: { type: BOOLEAN, defaultValue: false },
+    is_proffesional_at_2: { type: BOOLEAN, defaultValue: false },
     // win_bid:{
-    //   type: INTEGER,
-    //   references: {
-    //     model: Bid, // Can be both a string representing the table name or a Sequelize model
-    //     key: 'bid_id'
-    //   }
+    //   type: INTEGER,}
     // }
   },
   { sequelize, modelName: "Order" },
