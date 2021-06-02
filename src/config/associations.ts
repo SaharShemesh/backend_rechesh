@@ -73,7 +73,7 @@ export default function load_associations() {
     foreignKey: "sub_order",
   });
 
-  //   //assigment & Order
+  //   //assignment & Order
   models.Order.belongsTo(models.Assignment, {
     foreignKey: "assignment_id",
   });
@@ -83,6 +83,7 @@ export default function load_associations() {
 
   //   //Budget_Type & Order
   models.Order.belongsTo(models.Budget_Type, {
+    //גורם מתקצב
     foreignKey: "budget_type",
     as: "Budget_type",
   });
