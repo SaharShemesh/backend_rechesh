@@ -11,18 +11,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("user_permissions", [
-      {
-        permission: "מנהל על"
-      },
-      {
-        permission: "מנהל"
-      },
-      {
-        permission: "לקוח"
-      },
-    ]);
+    //create permissions
+    // await queryInterface.bulkInsert("User_permissions", [
+    //   {
+    //     permission: "מנהל על",
+    //   },
+    //   {
+    //     permission: "מנהל",
+    //   },
+    //   {
+    //     permission: "לקוח",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

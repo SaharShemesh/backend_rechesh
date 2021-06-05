@@ -11,29 +11,29 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("soldiers", [
-      {
-        first_name: "סהר",
-        last_name: "שמש",
-        id_num: "6575894",
-      },
-      {
-        first_name: "אור",
-        last_name: "בורנשטין",
-        id_num: "8645198",
-      },
-      {
-        first_name: "מיכל",
-        last_name: "אטיאס",
-        id_num: "3548675",
-      },
-      {
-        first_name: "אורי",
-        last_name: "אשל",
-        id_num: "9356782",
-      },
-    ]);
+    //soldiers
+    // await queryInterface.bulkInsert("soldiers", [
+    //   {
+    //     first_name: "סהר",
+    //     last_name: "שמש",
+    //     id_num: "8653940",
+    //   },
+    //   {
+    //     first_name: "אור",
+    //     last_name: "בורנשטיין",
+    //     id_num: "8653940",
+    //   },
+    //   {
+    //     first_name: "אורי",
+    //     last_name: "אשל",
+    //     id_num: "7685942",
+    //   },
+    //   {
+    //     first_name: "דני",
+    //     last_name: "סנטקובסקי",
+    //     id_num: "7345940",
+    //   }, //....
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

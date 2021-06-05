@@ -11,22 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("bims", [
-      {
-        bim_name: "מתן",
-        unit_id: 1
-      },
-      {
-        bim_name: "מצפן",
-        unit_id: 2
-      },
-      {
-        bim_name: "נשר",
-        unit_id: 3
-      },
-    ]);
-    
+    // await queryInterface.bulkInsert("bims", [
+    //   {
+    //     bim_name: "מצפן",
+    //     unit_id: 1,
+    //   },
+    //   {
+    //     bim_name: 'מת"ן',
+    //     unit_id: 4,
+    //   },
+    //   {
+    //     bim_name: "נשר",
+    //     unit_id: 3,
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

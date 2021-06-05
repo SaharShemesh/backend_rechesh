@@ -10,24 +10,3 @@ Procument_Type.init(
   },
   { sequelize, modelName: "procument_type" },
 );
-
-//seeders
-Procument_Type.sync({ force: true }).then(() => {
-  Procument_Type.bulkCreate(
-    [
-      {
-        type: "מנהלתי",
-      },
-      {
-        type: "אחקתי",
-      },
-    ],
-    {
-      fields: ["type"],
-      ignoreDuplicates: true,
-      updateOnDuplicate: ["type"],
-    },
-  )
-    //})
-    .then(() => console.log("Procument types were created"));
-});

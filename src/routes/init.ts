@@ -109,7 +109,7 @@ export function initRoutes(app: Express) {
   app.use("/api/User-Permissions", userPermissions_route.plural_router);
 
   //User Roles
-  app.use("/api/User-Roles", userRoles_route.singular_router);
+  app.use("/api/User-Role", userRoles_route.singular_router);
   app.use("/api/Users-Roles", userRoles_route.plural_router);
 
   //Base Hierarchy

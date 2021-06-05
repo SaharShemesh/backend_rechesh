@@ -11,8 +11,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("paka_types", [
+
+    await queryInterface.bulkInsert("order_types", [
       {
         type: "סוג אחד",
       },

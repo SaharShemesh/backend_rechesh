@@ -6,6 +6,7 @@ import {
   Bid,
   Creator,
   Provider,
+  Pulling_Bag,
   Sell_Item,
   Soldier,
   Status,
@@ -66,6 +67,10 @@ const fetching_format = {
           model: Status,
           as: "Status",
           attributes: ["id"],
+        },
+        {
+          model: Pulling_Bag,
+          as: "Pulling_bag",
         },
       ],
       attributes: [

@@ -25,6 +25,7 @@ import { Bid_Item } from "./bid_item";
 import { User } from "./user";
 import { Order } from "./order";
 import { Bim } from "./bim";
+import { Measurement } from "./measurement";
 export {
   Assignment,
   Base_Hierarchy,
@@ -53,4 +54,5 @@ export {
   Bid_Item,
   Bim,
   User,
+  Measurement,
 };

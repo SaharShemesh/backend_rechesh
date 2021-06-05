@@ -289,6 +289,14 @@ export default function load_associations() {
   models.File.belongsTo(models.Bid);
   models.Bid.hasMany(models.File);
 
+  models.Sell_Item.belongsTo(models.Measurement, {
+    foreignKey: "measurement",
+    as: "Measurement",
+  });
+  models.Measurement.hasMany(models.Sell_Item, {
+    foreignKey: "measurement",
+  });
+
   // sync db
   sequelize
     .sync({ alter: true })

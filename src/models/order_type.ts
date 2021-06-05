@@ -10,27 +10,3 @@ Order_Type.init(
   },
   { sequelize, modelName: "order_type" },
 );
-
-//seeders
-Order_Type.sync({ force: true }).then(() => {
-  Order_Type.bulkCreate(
-    [
-      {
-        type: "רכש בהקפה",
-      },
-      {
-        type: "רכש בדרישה",
-      },
-      {
-        type: "רכש במשיכה",
-      },
-    ],
-    {
-      fields: ["type"],
-      ignoreDuplicates: true,
-      updateOnDuplicate: ["type"],
-    },
-  )
-    //})
-    .then(() => console.log("Order types were created"));
-});

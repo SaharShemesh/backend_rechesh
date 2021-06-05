@@ -11,21 +11,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("units", [
-      {
-        unit: "תוהן",
-      },
-      {
-        unit: "מופת",
-      },
-      {
-        unit: "אינטגרציה",
-      },
-      {
-        unit: "יחידה 502",
-      },
-    ]);
+    // //units
+    // await queryInterface.bulkInsert("units", [
+    //   {
+    //     unit: "מופת",
+    //   },
+    //   {
+    //     unit: "מנהלה",
+    //   },
+    //   {
+    //     unit: "אינטגרציה",
+    //   },
+    //   {
+    //     unit: "תוהן",
+    //   },
+    //   {
+    //     unit: "יחידה 502",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

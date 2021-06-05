@@ -11,19 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("user_roles", [
+
+    //user roles
+    await queryInterface.bulkInsert("User_roles", [
       {
-        role: "חובש קרבי",
+        role: "מפקד בסיס",
       },
       {
-        role: "מתכנת",
+        role: "מפקד יחידה",
       },
       {
-        role: "עצלן",
+        role: "מפקד בים / גף",
       },
       {
-        role: "מפקד עולם",
+        role: "חייל",
       },
     ]);
   },

@@ -11,19 +11,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
+
     await queryInterface.bulkInsert("providers", [
       {
-        provider_name: "אלכס",
+        provider_name: "מחסני חשמל",
       },
       {
-        provider_name: "דוד",
-      },
-      {
-        provider_name: "מיכל",
-      },
-      {
-        provider_name: "פז",
+        provider_name: "ענק לוגיסטי",
       },
     ]);
   },

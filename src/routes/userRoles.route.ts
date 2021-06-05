@@ -5,7 +5,7 @@ import {
   create_one,
 } from "../controllers/userRoles.controller";
 const singular_router = express.Router();
-const plural_router = express.Router();
+const plural_router = express.Router({ mergeParams: true });
 
 //singular router
 //

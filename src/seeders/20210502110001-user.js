@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-   
+
     //units
     await queryInterface.bulkInsert("units", [
       {
@@ -134,14 +134,14 @@ module.exports = {
       },
     ]);
 
-    await queryInterface.bulkInsert("Providers", [
-      {
-        provider_name: "הכל בזול",
-      },
-      {
-        provider_name: "הכל ביוקר",
-      },
-    ]);
+    // await queryInterface.bulkInsert("Providers", [
+    //   {
+    //     provider_name: "הכל בזול",
+    //   },
+    //   {
+    //     provider_name: "הכל ביוקר",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

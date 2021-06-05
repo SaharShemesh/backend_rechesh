@@ -11,19 +11,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
+
     await queryInterface.bulkInsert("procument_types", [
       {
-        type: "סוג אחד",
+        type: "רכש מנהלתי",
       },
       {
-        type: "סוג שני",
-      },
-      {
-        type: "עוד איזה סוג",
-      },
-      {
-        type: "סוג יפה כזה",
+        type: "רכש אחזקתי",
       },
     ]);
   },
