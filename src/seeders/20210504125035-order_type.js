@@ -14,16 +14,13 @@ module.exports = {
 
     await queryInterface.bulkInsert("order_types", [
       {
-        type: "סוג אחד",
+        type: "רכש בהקפה",
       },
       {
-        type: "סוג שני",
+        type: "רכש במשיכה",
       },
       {
-        type: "עוד איזה סוג",
-      },
-      {
-        type: "סוג יפה כזה",
+        type: "רכש בדרישה",
       },
     ]);
   },

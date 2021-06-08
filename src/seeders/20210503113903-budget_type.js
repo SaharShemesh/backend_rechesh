@@ -11,16 +11,19 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
+
     await queryInterface.bulkInsert("budget_types", [
       {
-        type: "תקציב מלא"
+        type: "מטלה תקציבית",
       },
       {
-        type: "תקציב היקפי"
+        type: "אישור מנהל לתקציב בסיסי",
       },
       {
-        type: "תקציב חלקי"
+        type: "מצמ",
+      },
+      {
+        type: "פרויקנט",
       },
     ]);
   },
