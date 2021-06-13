@@ -26,6 +26,7 @@ import { User } from "./user";
 import { Order } from "./order";
 import { Bim } from "./bim";
 import { Measurement } from "./measurement";
+import { Iaf_Num } from "./iaf_num";
 export {
   Assignment,
   Base_Hierarchy,
@@ -55,4 +56,5 @@ export {
   Bim,
   User,
   Measurement,
+  Iaf_Num,
 };

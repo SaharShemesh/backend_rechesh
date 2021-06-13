@@ -1,26 +1,23 @@
-import { Model,INTEGER,BOOLEAN,STRING, } from 'sequelize'
-import { Bid } from './bid';
-import sequelize from './init';
-import { Order } from './order';
+import { Model, INTEGER, BOOLEAN, STRING } from "sequelize";
+import { Bid } from "./bid";
+import sequelize from "./init";
+import { Order } from "./order";
 
-export class Sell_Item extends Model {
-
-}
+export class Sell_Item extends Model {}
 
 Sell_Item.init(
   {
-    item_id: {type:INTEGER,primaryKey:true,autoIncrement:true},
+    item_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     //sub_order: {type:INTEGER},
-    desc: {type:STRING},
-    iaf_num: {type:STRING},
-    technical_spec: {type:BOOLEAN},
-    makat: {type:STRING},
+    desc: { type: STRING },
+    //iaf_num: {type:STRING},
+    technical_spec: { type: BOOLEAN },
+    makat: { type: STRING },
     //provider: {type:INTEGER},
     //creator: {type:INTEGER},
-    quantity: {type:INTEGER},
+    quantity: { type: INTEGER },
     //unit: {type:INTEGER},
-    price: {type:INTEGER}
+    price: { type: INTEGER },
   },
-  { sequelize, modelName: 'Sell_item' }
-)
-
+  { sequelize, modelName: "Sell_item" },
+);

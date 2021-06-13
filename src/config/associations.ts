@@ -265,6 +265,15 @@ export default function load_associations() {
     as: "Provider",
   });
 
+  // iaf_num & Sell_Item
+
+  models.Sell_Item.belongsTo(models.Iaf_Num, {
+    foreignKey: "Iaf_num",
+  });
+  models.Iaf_Num.hasMany(models.Sell_Item, {
+    foreignKey: "Iaf_num",
+  });
+
   // //   //creator & Sell_Item
   models.Sell_Item.belongsTo(models.Creator, {
     foreignKey: "creator",

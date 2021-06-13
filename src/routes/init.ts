@@ -26,6 +26,8 @@ import * as pullingBag_route from "./pulling_Bag.controller";
 import * as soldier_route from "./soldier.route";
 import * as statusHistory_route from "./status_History.route";
 import * as bim_route from "./bim.route";
+import * as iaf_num_route from "./iaf_num.route";
+import * as measurement_route from "./measurement.route";
 
 export function initRoutes(app: Express) {
   app.get("/api", (request: Request, response: Response) => {
@@ -143,4 +145,12 @@ export function initRoutes(app: Express) {
   //Status History
   app.use("/api/Status-History", statusHistory_route.singular_router);
   app.use("/api/Status-Histories", statusHistory_route.plural_router);
+
+  //iaf_num
+  app.use("/api/iaf-num", iaf_num_route.singular_router);
+  app.use("/api/iaf-nums", iaf_num_route.plural_router);
+
+  //measurement
+  app.use("/api/measurement", measurement_route.singular_router);
+  app.use("/api/measurements", measurement_route.plural_router);
 }
