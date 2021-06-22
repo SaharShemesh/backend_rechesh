@@ -7,7 +7,7 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let data = await Constants.findAll({ raw: true });
+    let data = await Constants.findAll({ raw: true, order: [["type", "ASC"]] });
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });

@@ -11,27 +11,37 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
+
     await queryInterface.bulkInsert("constants", [
       {
-        type: "קבוע 1",
-        condition: "בדיקה של קבוע אחד",
-        price_value: "מלא כסף",
+        type: "אסמכתא",
+        condition: "עלות מקסימלית לרכש באסמכתא",
+        price_value: "2999",
       },
       {
-        type: "קבוע 2",
-        condition: "בדיקה של קבוע שני",
-        price_value: "מלא כסף שוב",
+        type: "אסמכתא",
+        condition: "עלות מקסימלית לפקע באסמכתא",
+        price_value: "10000",
       },
       {
-        type: "קבוע 3",
-        condition: "בדיקה של קבוע שלישי",
-        price_value: "הפעם לא כזה מלא כסף",
+        type: "אסמכתא",
+        condition: "כמות ימים לרכש מאותו יצרן באסמכתא",
+        price_value: "193",
       },
       {
-        type: "קבוע 4",
-        condition: "בדיקה של קבוע רביעי",
-        price_value: "מלא מלא כסף",
+        type: "משיכה",
+        condition: "אחוז תקציב זמין נדרש בתיק משיכה",
+        price_value: "30%",
+      },
+      {
+        type: "דרישה",
+        condition: "עלות מינימאלית לרכש בתיק דרישה",
+        price_value: "2100",
+      },
+      {
+        type: "דרישה",
+        condition: "כמות ימים לרכש מאותו יצרן בתיק דרישה",
+        price_value: "102",
       },
     ]);
   },

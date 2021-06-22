@@ -57,3 +57,23 @@ export const create_one = async (
     res.status(500).json({ error: "internal error" });
   }
 };
+
+export let update_soldiers = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let soldiers = req.body;
+  console.log(soldiers);
+  Promise.all(
+    soldiers.map((soldier: any) =>
+      Soldier.update(soldier, {
+        where: {
+          id: soldier.id,
+        },
+      }),
+    ),
+  )
+    .then((users) => next())
+    .catch((error) => next(error));
+};

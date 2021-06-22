@@ -22,7 +22,7 @@ import * as constants_route from "./constants.route";
 import * as creator_route from "./creator.route";
 import * as file_route from "./file.route";
 import * as paka_route from "./paka.route";
-import * as pullingBag_route from "./pulling_Bag.controller";
+import * as pullingBag_route from "./pulling_Bag.route";
 import * as soldier_route from "./soldier.route";
 import * as statusHistory_route from "./status_History.route";
 import * as bim_route from "./bim.route";

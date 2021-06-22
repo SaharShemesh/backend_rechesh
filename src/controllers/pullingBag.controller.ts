@@ -7,7 +7,9 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let data = await Pulling_Bag.findAll({ raw: true });
+    let data = await (
+      await Pulling_Bag.findAll({ raw: true })
+    ).map((bag) => ({ ...bag, calculated_finshed_budget: 0 }));
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });

@@ -9,7 +9,21 @@ export let get_all = (req: Request, res: Response) => {
     .then((users_co) => res.status(200).json(users_co))
     .catch((error) => res.status(400).json({ error }));
 };
-
+export let update_users = (req: Request, res: Response, next: NextFunction) => {
+  let users = req.body;
+  console.log(users);
+  Promise.all(
+    users.map((user: any) =>
+      User.update(user, {
+        where: {
+          id: user.id,
+        },
+      }),
+    ),
+  )
+    .then((users) => next())
+    .catch((error) => next(error));
+};
 // export let create_user = async (req: Request, res: Response) => {
 //   try {
 //     let order = await user_helper.post_order(req.body);
