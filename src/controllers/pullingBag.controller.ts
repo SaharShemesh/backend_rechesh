@@ -7,15 +7,25 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let data = await (
-      await Pulling_Bag.findAll({ raw: true })
-    ).map((bag) => ({ ...bag, calculated_finshed_budget: 0 }));
+    let data = await Pulling_Bag.findAll({ raw: true });
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
 };
-
+export const get_created = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let data = await Pulling_Bag.findAll({ raw: true });
+    data = data.splice(0, data.length - req.body.length);
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ error: "internal error" });
+  }
+};
 export const get_one = async (
   req: Request,
   res: Response,
@@ -58,4 +68,42 @@ export const create_one = async (
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
+};
+
+export const create_bags = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let pulling_bags = req.body;
+    let created = await Promise.all(
+      pulling_bags.map((pulling_bag: any) => Pulling_Bag.create(pulling_bag)),
+    );
+    res.json(created).status(201);
+  } catch (er) {
+    next(er);
+  }
+};
+export const update_bags = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let pulling_bags = req.body;
+  return Promise.all(
+    pulling_bags.map((pulling_bag: any) =>
+      Pulling_Bag.update(pulling_bag, {
+        where: {
+          bag_id: pulling_bag.bag_id,
+        },
+      }),
+    ),
+  )
+    .then(() => {
+      next();
+    })
+    .catch((er) => {
+      next(er);
+    });
 };
