@@ -14,4 +14,5 @@ singular_router.get("/:id", get_user);
 //plural router
 plural_router.get("/", get_all);
 plural_router.put("/", update_users, update_soldiers, get_all);
+
 export { singular_router, plural_router };

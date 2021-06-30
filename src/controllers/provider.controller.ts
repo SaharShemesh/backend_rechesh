@@ -24,13 +24,32 @@ export const get_one = async (
     let data = await Provider.findAll({
       raw: true,
       where: {
-        type_id: id,
+        provider_id: id,
       },
     });
     res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
+};
+
+export let update_providers = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let providers = req.body;
+  Promise.all(
+    providers.map((provider: any) =>
+      Provider.update(provider, {
+        where: {
+          provider_id: provider.provider_id,
+        },
+      }),
+    ),
+  )
+    .then((providers) => next())
+    .catch((error) => next(error));
 };
 
 // {type_name:"xszxs"}
