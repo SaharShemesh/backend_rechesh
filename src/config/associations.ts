@@ -247,6 +247,7 @@ export default function load_associations() {
   // //   //Soldier & User
   models.User.belongsTo(models.Soldier, {
     foreignKey: "soldier_id",
+    as: "Soldier",
   });
   models.Soldier.hasOne(models.User, {
     foreignKey: "soldier_id",
@@ -308,7 +309,7 @@ export default function load_associations() {
 
   // sync db
   sequelize
-    .sync({ alter: true })
+    .sync({ force: true })
     .then(() => console.log("success"))
     .catch((e) => console.log("faliur", e));
 }

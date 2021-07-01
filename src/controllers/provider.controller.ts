@@ -39,6 +39,8 @@ export let update_providers = (
   next: NextFunction,
 ) => {
   let providers = req.body;
+  console.log("providers = ", providers);
+
   Promise.all(
     providers.map((provider: any) =>
       Provider.update(provider, {
@@ -50,6 +52,28 @@ export let update_providers = (
   )
     .then((providers) => next())
     .catch((error) => next(error));
+};
+
+export let get_created = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {};
+
+export let create_providers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let new_providers = req.body;
+    let created_providers = await Promise.all(
+      new_providers.map((provider: any) => Provider.create(provider)),
+    );
+    res.status(201).json(created_providers);
+  } catch (er) {
+    next(er);
+  }
 };
 
 // {type_name:"xszxs"}

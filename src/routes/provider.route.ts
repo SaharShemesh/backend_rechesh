@@ -4,7 +4,11 @@ import {
   get_one,
   create_one,
 } from "../controllers/provider.controller";
-import { update_providers } from "../controllers/provider.controller";
+import {
+  update_providers,
+  create_providers,
+  get_created,
+} from "../controllers/provider.controller";
 const singular_router = express.Router();
 const plural_router = express.Router();
 
@@ -16,5 +20,6 @@ singular_router.post("/", create_one);
 //plural router
 plural_router.get("/", get_all);
 plural_router.put("/", update_providers, get_all);
+plural_router.post("/", create_providers);
 
 export { singular_router, plural_router };

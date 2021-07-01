@@ -11,7 +11,7 @@ export let get_all = (req: Request, res: Response) => {
 };
 export let update_users = (req: Request, res: Response, next: NextFunction) => {
   let users = req.body;
-  console.log(users);
+  console.log("users = ", users);
   Promise.all(
     users.map((user: any) =>
       User.update(user, {
