@@ -14,6 +14,26 @@ export const get_all = async (
   }
 };
 
+export let update_constants = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let constants = req.body;
+
+  Promise.all(
+    constants.map((constant: any) =>
+      Constants.update(constant, {
+        where: {
+          cons_id: constant.cons_id,
+        },
+      }),
+    ),
+  )
+    .then((constants) => next())
+    .catch((error) => next(error));
+};
+
 export const get_one = async (
   req: Request,
   res: Response,

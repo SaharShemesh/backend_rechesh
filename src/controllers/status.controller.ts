@@ -33,6 +33,29 @@ export const get_one = async (
   }
 };
 
+export const update_status = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let statuses = req.body;
+  return Promise.all(
+    statuses.map((status: any) =>
+      statuses.update(statuses, {
+        where: {
+          id: status.id,
+        },
+      }),
+    ),
+  )
+    .then(() => {
+      next();
+    })
+    .catch((er) => {
+      next(er);
+    });
+};
+
 // {type_name:"xszxs"}
 export const create_one = async (
   req: Request,

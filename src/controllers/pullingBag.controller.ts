@@ -85,6 +85,14 @@ export const create_bags = async (
     next(er);
   }
 };
+
+export const delete_bags = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  //return Promise();
+};
 export const update_bags = (
   req: Request,
   res: Response,
