@@ -1,6 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 //import * as user_helper from '../helpers/user.helper';
-import { Soldier, User } from "../models";
+import {
+  Base_Hierarchy,
+  Bim,
+  Soldier,
+  User,
+  User_Permission,
+  User_Roles,
+} from "../models";
 
 export let get_all = (req: Request, res: Response) => {
   User.findAll({
@@ -44,6 +51,21 @@ export let get_user = async (
     where: {
       id: user_id,
     },
+    include: [
+      { model: User_Roles, as: "Role" },
+      { model: Soldier, as: "Soldier" },
+      { model: User_Permission, as: "Permission" },
+      {
+        model: Base_Hierarchy,
+        as: "Location",
+        include: [
+          {
+            model: Bim,
+            as: "bim",
+          },
+        ],
+      },
+    ],
   });
   if (!user) next({ message: "user was not found" });
   else res.status(200).json(user);

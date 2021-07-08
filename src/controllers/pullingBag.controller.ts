@@ -7,11 +7,33 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let data = await Pulling_Bag.findAll({ raw: true });
-    res.status(200).json(data);
+    let data = await Pulling_Bag.findAll({
+      raw: true,
+      where: { wasDeleted: false },
+    });
+    res
+      .status(200)
+      .json(data.map((item) => ({ ...item, calculated_finished_budget: 0 })));
   } catch (e) {
     res.status(500).json({ error: "internal error" });
   }
+};
+export const delete_bag = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  let bag_id = req.params.bag_id;
+  Pulling_Bag.update(
+    { wasDeleted: true },
+    {
+      where: {
+        bag_id,
+      },
+    },
+  )
+    .then((bag) => res.status(200).json({ bag }))
+    .catch((er) => next(er));
 };
 export const get_created = async (
   req: Request,

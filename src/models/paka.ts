@@ -5,7 +5,8 @@ export class Paka extends Model {}
 
 Paka.init(
   {
-    paka: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    paka_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    paka_number: { type: STRING },
     paka_team: { type: STRING },
     priority: { type: INTEGER },
     deadline: { type: DATEONLY },

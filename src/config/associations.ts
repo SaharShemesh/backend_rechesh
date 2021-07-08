@@ -126,12 +126,14 @@ export default function load_associations() {
   });
 
   //Paka_Type & Order
-  // models.Order.belongsTo(models.Paka_Type, {
-  //   foreignKey: "Paka_type",
-  // });
-  // models.Paka_Type.hasMany(models.Order, {
-  //   foreignKey: "Paka_type",
-  // });
+  models.Paka.belongsTo(models.Paka_Type, {
+    foreignKey: "paka_type",
+    as: "Paka_type",
+  });
+  models.Paka_Type.hasMany(models.Paka, {
+    foreignKey: "paka_type",
+    as: "paka",
+  });
 
   //   //Paka & Order
   models.Order.belongsTo(models.Paka, {
@@ -141,7 +143,11 @@ export default function load_associations() {
   models.Paka.hasMany(models.Order, {
     foreignKey: "paka",
   });
-
+  //paka and priority
+  models.Paka.belongsTo(models.Priority, {
+    foreignKey: "priority",
+    as: "Priority",
+  });
   //  //Pulling_Bag & Order
   models.Order.belongsTo(models.Pulling_Bag, {
     foreignKey: "pulling_bag",

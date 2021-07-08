@@ -1,4 +1,5 @@
 import { FLOAT } from "sequelize";
+import { BOOLEAN } from "sequelize";
 import { Model, INTEGER, STRING } from "sequelize";
 import sequelize from "./init";
 
@@ -11,6 +12,7 @@ Pulling_Bag.init(
     bag_description: { type: STRING },
     sum_budget: { type: FLOAT },
     tiov_budget: { type: FLOAT },
+    wasDeleted: { type: BOOLEAN, defaultValue: false },
   },
   { sequelize, modelName: "pulling_bag" },
 );

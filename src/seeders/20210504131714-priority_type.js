@@ -11,21 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("priority_types", [
-      {
-        type: "סוג אחד",
-      },
-      {
-        type: "סוג שני",
-      },
-      {
-        type: "עוד איזה סוג",
-      },
-      {
-        type: "סוג יפה כזה",
-      },
-    ]);
+    // await queryInterface.bulkInsert("priority_types", [
+    //   {
+    //     type: "סוג אחד",
+    //   },
+    //   {
+    //     type: "סוג שני",
+    //   },
+    //   {
+    //     type: "עוד איזה סוג",
+    //   },
+    //   {
+    //     type: "סוג יפה כזה",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

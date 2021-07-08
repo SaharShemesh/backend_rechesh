@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Paka } from "../models";
+import { Paka, Paka_Type, Priority } from "../models";
 
 export const get_all = async (
   req: Request,
@@ -7,10 +7,21 @@ export const get_all = async (
   next: NextFunction,
 ) => {
   try {
-    let data = await Paka.findAll({ raw: true });
+    let data = await Paka.findAll({
+      include: [
+        {
+          model: Paka_Type,
+          as: "Paka_type",
+        },
+        {
+          model: Priority,
+          as: "Priority",
+        },
+      ],
+    });
     res.status(200).json(data);
-  } catch (e) {
-    res.status(500).json({ error: "internal error" });
+  } catch (er) {
+    res.status(500).json({ er });
   }
 };
 
@@ -28,8 +39,8 @@ export const get_one = async (
       },
     });
     res.status(200).json(types);
-  } catch (e) {
-    res.status(500).json({ error: "internal error" });
+  } catch (error) {
+    res.status(500).json({ error });
   }
 };
 
@@ -53,7 +64,7 @@ export const create_one = async (
     } else {
       res.status(400).json({ error: "problem in creating this paka" });
     }
-  } catch (e) {
-    res.status(500).json({ error: "internal error" });
+  } catch (er) {
+    res.status(500).json({ er });
   }
 };
