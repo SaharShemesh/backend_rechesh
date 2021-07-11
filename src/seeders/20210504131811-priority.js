@@ -11,21 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    
-    await queryInterface.bulkInsert("priorities", [
-      {
-        priority_name: "שם חשוב",
-      },
-      {
-        priority_name: "שם חשוב אחר",
-      },
-      {
-        priority_name: "עוד איזה שם חשוב",
-      },
-      {
-        priority_name: "שם חשוב יפה כזה",
-      },
-    ]);
+    // await queryInterface.bulkInsert("priorities", [
+    //   {
+    //     priority_name: "שם חשוב",
+    //   },
+    //   {
+    //     priority_name: "שם חשוב אחר",
+    //   },
+    //   {
+    //     priority_name: "עוד איזה שם חשוב",
+    //   },
+    //   {
+    //     priority_name: "שם חשוב יפה כזה",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

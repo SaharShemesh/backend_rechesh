@@ -34,6 +34,7 @@ Order.init(
     is_cmdr: { type: BOOLEAN, defaultValue: false },
     is_proffesional_at_1: { type: BOOLEAN, defaultValue: false },
     is_proffesional_at_2: { type: BOOLEAN, defaultValue: false },
+    paka_desc: { type: STRING, defaultValue: "" },
     // win_bid:{
     //   type: INTEGER,}
     // }

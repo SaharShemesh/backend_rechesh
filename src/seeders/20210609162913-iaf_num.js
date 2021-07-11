@@ -11,21 +11,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-
-    await queryInterface.bulkInsert("iaf_nums", [
-      {
-        iaf_num: "43839283",
-      },
-      {
-        iaf_num: "93729274",
-      },
-      {
-        iaf_num: "28393759",
-      },
-      {
-        iaf_num: "92848574",
-      },
-    ]);
+    // await queryInterface.bulkInsert("iaf_nums", [
+    //   {
+    //     iaf_num: "43839283",
+    //     desc: "מסחא ראשונה",
+    //   },
+    //   {
+    //     iaf_num: "93729274",
+    //     desc: "מסחא שנייה",
+    //   },
+    //   {
+    //     iaf_num: "28393759",
+    //     desc: "מסחא שלישית",
+    //   },
+    //   {
+    //     iaf_num: "92848574",
+    //     desc: "מסחא רביעית",
+    //   },
+    // ]);
   },
 
   down: async (queryInterface, Sequelize) => {

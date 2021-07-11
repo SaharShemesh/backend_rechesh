@@ -12,7 +12,6 @@ Sell_Item.init(
     desc: { type: STRING },
     //iaf_num: {type:STRING},
     technical_spec: { type: BOOLEAN },
-    makat: { type: STRING },
     //provider: {type:INTEGER},
     //creator: {type:INTEGER},
     quantity: { type: INTEGER },

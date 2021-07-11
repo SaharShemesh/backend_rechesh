@@ -9,8 +9,10 @@ Paka.init(
     paka_number: { type: STRING },
     paka_team: { type: STRING },
     priority: { type: INTEGER },
+    paka_desc: { type: STRING },
     deadline: { type: DATEONLY },
     paka_type: { type: INTEGER },
+    item_desc: { type: STRING, defaultValue: "" },
   },
   { sequelize, modelName: "paka" },
 );

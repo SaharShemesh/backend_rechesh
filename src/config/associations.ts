@@ -281,6 +281,20 @@ export default function load_associations() {
     foreignKey: "Iaf_num",
   });
 
+  //paka and mascha
+  models.Paka.belongsTo(models.Iaf_Num, {
+    foreignKey: {
+      defaultValue: null,
+      name: "iaf_Num",
+    },
+  });
+  models.Iaf_Num.hasMany(models.Paka, {
+    foreignKey: {
+      defaultValue: null,
+      name: "iaf_Num",
+    },
+  });
+
   // //   //creator & Sell_Item
   models.Sell_Item.belongsTo(models.Creator, {
     foreignKey: "creator",
