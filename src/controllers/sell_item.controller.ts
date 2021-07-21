@@ -2,6 +2,8 @@ import { NextFunction, Request, response, Response } from "express";
 import * as sellitem_helper from "../helpers/sell_item.helper";
 import * as order_helper from "../helpers/Order.helper";
 import { Order, Sell_Item } from "../models";
+import { sell_item_format } from "../config/formats";
+import { Op } from "sequelize";
 
 export let get_all = async (
   req: Request,
@@ -49,7 +51,15 @@ export let put_items = (req: Request, res: Response, nx: NextFunction) => {
       }),
     ),
   )
-    .then((re) => res.json({ success: "items where updated" }))
+    .then(() =>
+      Sell_Item.findAll({
+        ...sell_item_format,
+        where: {
+          sub_order: parseInt(req.params.sub_id),
+        },
+      }),
+    )
+    .then((re) => res.json(re))
     .catch((errr) => nx(errr));
 };
 
@@ -64,8 +74,15 @@ export let post_items = (req: Request, res: Response, nx: NextFunction) => {
     .then((order: any) => {
       return Promise.all(items.map((item: any) => order.createSell_item(item)));
     })
-    .then(() => {
-      res.json({ ms: "created item" });
+    .then((items) => {
+      let item_ids = items.map(({ item_id }) => ({ item_id }));
+      return Sell_Item.findAll({
+        where: {
+          [Op.or]: item_ids,
+        },
+        ...sell_item_format,
+      });
     })
+    .then((items) => res.status(200).json(items))
     .catch((errr) => nx(errr));
 };

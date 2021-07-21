@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+import { order_format } from "../config/formats";
 import * as order_helper from "../helpers/Order.helper";
 import * as sell_Item_helper from "../helpers/sell_item.helper";
 import {
+  Assignment,
   Bid,
   Budget_Type,
   MN_Order,
@@ -186,9 +188,9 @@ export let update_order = (req: Request, res: Response, nx: NextFunction) => {
       }
 
       if (req.body.assignment_id) {
-        let assignment_nu = await Budget_Type.findOne({
+        let assignment_nu = await Assignment.findOne({
           where: {
-            assignment_id: req.body.assignment_id,
+            id: req.body.assignment_id,
           },
         });
         if (!assignment_nu)
@@ -201,7 +203,7 @@ export let update_order = (req: Request, res: Response, nx: NextFunction) => {
       if (req.body.paka) {
         let paka_ia = await Paka.findOne({
           where: {
-            paka: req.body.paka,
+            paka_id: req.body.paka,
           },
         });
         if (!paka_ia)
@@ -304,7 +306,17 @@ export let update_order = (req: Request, res: Response, nx: NextFunction) => {
         },
       });
     })
-    .then(() => res.status(200).json({ message: "success" }))
+    .then((order) =>
+      Order.findOne({
+        where: {
+          id: order_id,
+        },
+        include: [...order_format],
+      }),
+    )
+    .then((order) => {
+      res.status(200).json(order);
+    })
     .catch((er) => nx(er));
 };
 

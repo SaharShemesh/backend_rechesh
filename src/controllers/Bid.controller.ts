@@ -51,41 +51,34 @@ export let delete_bid = async (req: Request, res: Response) => {
   }
 };
 
-export let post_bids = (req: Request, res: Response, nx: NextFunction) => {
+export let post_bids = async (
+  req: Request,
+  res: Response,
+  nx: NextFunction,
+) => {
   let bids = req.body;
   let id = parseInt(req.params.sub_id);
-  console.log(bids);
-  return Order.findOne({
-    where: {
-      id,
-    },
-  })
-    .then((order) => {
-      return Promise.all(
-        bids.map((bid: any) => {
-          //@ts-ignore
-          return (
-            order
-              //@ts-ignore
-              .createBid({
-                Provider: bid.Provider,
-              })
-              .then((new_bid: any) => {
-                //@ts-ignore
-                return Promise.all(
-                  //@ts-ignore
-                  bid.items.map((item) => {
-                    //@ts-ignore
-                    new_bid.addSell_item(item.id, { through: item });
-                  }),
-                ).catch((errr) => nx(errr));
-              })
-              //@ts-ignore
-              .catch((errr) => nx(errr))
-          );
-        }),
-      );
-    })
-    .then((x) => res.json({ success: "created bids" }))
-    .catch((errr) => nx(errr));
+  try {
+    let order = await Order.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!order) throw "order was not found";
+    for (const bid of bids) {
+      console.log("bid:", bid);
+      //@ts-ignore
+      let created_bid = await order.createBid({ Provider: bid.Provider });
+      for (const item of bid.items) {
+        item.recive_time = new Date(item.recive_time);
+        let sellitem = await created_bid.addSell_item(item.id, {
+          through: item,
+        });
+        console.log("my item");
+      }
+    }
+    res.status(201).end();
+  } catch (er) {
+    nx(er);
+  }
 };

@@ -188,6 +188,18 @@ export default function load_associations() {
     foreignKey: "bid_id",
     otherKey: "item_id",
   });
+  models.Bid.hasMany(models.Bid_Item, {
+    foreignKey: "bid_id",
+  });
+  models.Bid_Item.belongsTo(models.Bid, {
+    foreignKey: "bid_id",
+  });
+  models.Sell_Item.hasMany(models.Bid_Item, {
+    foreignKey: "item_id",
+  });
+  models.Bid_Item.belongsTo(models.Sell_Item, {
+    foreignKey: "item_id",
+  });
 
   models.Bid.belongsTo(models.Provider, {
     foreignKey: "Provider",
