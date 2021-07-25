@@ -66,15 +66,13 @@ export let post_bids = async (
     });
     if (!order) throw "order was not found";
     for (const bid of bids) {
-      console.log("bid:", bid);
       //@ts-ignore
       let created_bid = await order.createBid({ Provider: bid.Provider });
       for (const item of bid.items) {
         item.recive_time = new Date(item.recive_time);
-        let sellitem = await created_bid.addSell_item(item.id, {
+        await created_bid.addSell_item(item.item_id, {
           through: item,
         });
-        console.log("my item");
       }
     }
     res.status(201).end();
